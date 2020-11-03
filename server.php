@@ -1,6 +1,6 @@
 <?php
 
-define("BASE_PATH", __DIR__ . "/");
+define("BASE_PATH", "/");
 define("APP_PATH", BASE_PATH . "app/");
 define("VENDOR_PATH", BASE_PATH . "vendor/");
 define("ROUTES_PATH", BASE_PATH . "routes/");
@@ -14,10 +14,11 @@ require_once VENDOR_PATH . "autoload.php";
 require_once APP_PATH . "helpers.php";
 
 var_dump(BASE_PATH);
-// use MasterStudents\Core\Application;
 
-// $app = new Application();
+use MasterStudents\Core\Application;
 
-// require_once ROUTES_PATH . "web.php";
+$app = new Application();
 
-// $app->run();
+require_once ROUTES_PATH . "web.php";
+
+$app->run();

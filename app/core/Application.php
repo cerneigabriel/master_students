@@ -18,7 +18,7 @@ class Application
         $this->request = new Request();
         $this->router = new Router($this->request);
 
-        if ($_ENV["APP_ENV"] === "production") Dotenv::createImmutable(BASE_PATH . "../")->load();
+        if (env("APP_ENV") === "production") Dotenv::createImmutable(BASE_PATH . "../")->load();
         else Dotenv::createImmutable(BASE_PATH)->load();
     }
 

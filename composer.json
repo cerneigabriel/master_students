@@ -10,11 +10,10 @@
     ],
     "autoload": {
         "psr-4": {
-            "MasterStudents\\": "./"
+            "MasterStudents\\": "app/"
         }
     },
     "require": {
-        "vlucas/phpdotenv": "^5.2",
-        "phpunit/phpunit": "^5.0"
+        "vlucas/phpdotenv": "^5.2"
     }
 }

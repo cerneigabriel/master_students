@@ -1,6 +1,6 @@
 <?php
 
-define("BASE_PATH", __DIR__ . "/../");
+define("BASE_PATH", "/");
 define("APP_PATH", BASE_PATH . "app/");
 define("VENDOR_PATH", BASE_PATH . "vendor/");
 define("ROUTES_PATH", BASE_PATH . "routes/");

@@ -8,13 +8,15 @@ define("VIEWS_PATH", BASE_PATH . "resources/views/");
 define("LAYOUTS_PATH", VIEWS_PATH . "layouts/");
 define("CONFIG_PATH", BASE_PATH . "config/");
 
-require_once VENDOR_PATH . "autoload.php";
-require_once APP_PATH . "helpers.php";
 
-use MasterStudents\Core\Application;
+echo $_SERVER;
+// require_once VENDOR_PATH . "autoload.php";
+// require_once APP_PATH . "helpers.php";
 
-$app = new Application();
+// use MasterStudents\Core\Application;
 
-require_once ROUTES_PATH . "web.php";
+// $app = new Application();
 
-$app->run();
+// require_once ROUTES_PATH . "web.php";
+
+// $app->run();

@@ -11,11 +11,11 @@ define("CONFIG_PATH", BASE_PATH . "config/");
 
 // echo $_SERVER;
 require_once VENDOR_PATH . "autoload.php";
-// require_once APP_PATH . "helpers.php";
+require_once APP_PATH . "helpers.php";
 
-// use MasterStudents\Core\Application;
+use MasterStudents\Core\Application;
 
-// $app = new Application();
+$app = new Application();
 
 // require_once ROUTES_PATH . "web.php";
 

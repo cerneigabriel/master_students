@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+
 define("BASE_PATH", __DIR__ . "/");
 define("APP_PATH", BASE_PATH . "app/");
 define("VENDOR_PATH", BASE_PATH . "vendor/");

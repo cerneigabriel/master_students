@@ -1,10 +1,17 @@
 <?php
 
-$app->router->get("/", "frontend.index");
+use MasterStudents\Controllers\ContactController;
+use MasterStudents\Core\Request;
+use MasterStudents\Core\View;
 
-$app->router->get("/about", "frontend.about");
+$app->router->get("/", array("controller" => "PagesController::index", "name" => "home"));
+$app->router->get("/about", array("controller" => "PagesController::about", "name" => "about"));
 
-$app->router->get("/contact", "frontend.contact");
+$app->router->get("/contact", array(
+    "controller" => "ContactController::index",
+    "name" => "contact.index"
+));
+$app->router->post("/contact", array("controller" => "ContactController::send", "name" => "contact.send"));
 
-
-$app->router->get("/admin", "backend.index");
+// Errors handlers
+$app->router->get("/404", array("controller" => "ErrorsController::handle404", "name" => "error.404"));

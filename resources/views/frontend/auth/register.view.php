@@ -5,7 +5,6 @@
                 <div class="card-body">
                     <h1>Register</h1>
                     <hr>
-                    <?php var_dump($errors); ?>
                     <form action="<?php echo url("auth.register") ?>" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-6">

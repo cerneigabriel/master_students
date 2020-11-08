@@ -20,4 +20,17 @@ class Request
     {
         return strtolower($_SERVER["REQUEST_METHOD"]);
     }
+
+    public function all()
+    {
+        switch ($this->getMethod()) {
+            case "post":
+                return $_POST;
+                break;
+            case "get":
+            default:
+                return $_GET;
+                break;
+        }
+    }
 }

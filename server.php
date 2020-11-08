@@ -12,9 +12,11 @@ define("CONFIG_PATH", BASE_PATH . "config/");
 require_once VENDOR_PATH . "autoload.php";
 require_once APP_PATH . "helpers.php";
 
+// var_dump($_SERVER);
+
 use MasterStudents\Core\Application;
 
-$app = new Application();
+$app = new Application(BASE_PATH);
 
 require_once ROUTES_PATH . "web.php";
 

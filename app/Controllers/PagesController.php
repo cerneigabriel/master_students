@@ -2,9 +2,10 @@
 
 namespace MasterStudents\Controllers;
 
+use MasterStudents\Core\Controller;
 use MasterStudents\Core\View;
 
-class PagesController
+class PagesController extends Controller
 {
     public function index()
     {

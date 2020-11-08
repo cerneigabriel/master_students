@@ -2,9 +2,10 @@
 
 namespace MasterStudents\Controllers;
 
+use MasterStudents\Core\Controller;
 use MasterStudents\Core\View;
 
-class ErrorsController
+class ErrorsController extends Controller
 {
     protected $views = [
         "404" => "frontend.errors.404",

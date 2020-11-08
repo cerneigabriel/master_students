@@ -3,10 +3,11 @@
 namespace MasterStudents\Controllers;
 
 use MasterStudents\Core\Application;
+use MasterStudents\Core\Controller;
 use MasterStudents\Core\Request;
 use MasterStudents\Core\View;
 
-class ContactController
+class ContactController extends Controller
 {
     public function index()
     {
@@ -15,7 +16,7 @@ class ContactController
 
     public function send(Request $request)
     {
-        var_dump($request->all());
+        var_dump($request->all()->toArray());
         return "Form submited";
     }
 }

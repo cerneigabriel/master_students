@@ -43,11 +43,6 @@ class View
 
     public function render()
     {
-        foreach ($this->data as $name => $value) {
-            global $$name;
-            $$name = $value;
-        }
-
         $layout_content = $this->layoutContent();
         $view_content = $this->viewContent();
 
@@ -68,6 +63,9 @@ class View
 
     protected function viewContent()
     {
+        foreach ($this->data as $name => $value) {
+            $$name = $value;
+        }
         ob_start();
         if (file_exists($this->view_path)) {
             include_once $this->view_path;

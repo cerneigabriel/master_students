@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand d-flex align-items-center" href="/">
-            <img src="assets/images/icons/master_students_logo.png" alt="" height="40px" class="mr-2">
+            <img src="<?php echo assets("assets/images/icons/master_students_logo.png"); ?>" alt="" height="40px" class="mr-2">
             <?php echo config("app.app_name") ?>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,9 +21,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link <?php echo router()->current_route->name == "home" ? "active" : ""; ?>" href="/">Home</a>
-                <a class="nav-link <?php echo router()->current_route->name == "about" ? "active" : ""; ?>" href="/about">About</a>
-                <a class="nav-link <?php echo router()->current_route->name == "contact.index" ? "active" : ""; ?>" href="/contact">Contact</a>
+                <a class="nav-link <?php echo router()->current_route->name == "home" ? "active" : ""; ?>" href="<?php echo url("home"); ?>">Home</a>
+                <a class="nav-link <?php echo router()->current_route->name == "about" ? "active" : ""; ?>" href="<?php echo url("about"); ?>">About</a>
+                <a class="nav-link <?php echo router()->current_route->name == "contact.index" ? "active" : ""; ?>" href="<?php echo url("contact.index"); ?>">Contact</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link <?php echo router()->current_route->name == "auth.login" ? "active" : ""; ?>" href="<?php echo url("auth.login"); ?>">Sign In</a>
+                <a class="nav-link <?php echo router()->current_route->name == "auth.register" ? "active" : ""; ?>" href="<?php echo url("auth.register"); ?>">Sign Up</a>
             </div>
         </div>
     </nav>

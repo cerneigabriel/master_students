@@ -29,7 +29,7 @@ class Route
 
     private function setController($controller)
     {
-        if (!!strpos($controller, "::") && count(explode("::", $controller)) === 2) {
+        if (is_string($controller) && !!strpos($controller, "::") && count(explode("::", $controller)) === 2) {
             $this->controller = "\\MasterStudents\\Controllers\\" . explode("::", $controller)[0];
             $this->controller = new $this->controller;
             $this->controller_method = explode("::", $controller)[1];

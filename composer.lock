@@ -4,8 +4,115 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "685f7a499a692522f9036a8b9a4a2cad",
+    "content-hash": "19778e6068f7b053362862b2cf621205",
     "packages": [
+        {
+            "name": "easyframework/collections",
+            "version": "v7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/italolelis/collections.git",
+                "reference": "588c27263bc04c432bc70f01ec66efa88079edec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/italolelis/collections/zipball/588c27263bc04c432bc70f01ec66efa88079edec",
+                "reference": "588c27263bc04c432bc70f01ec66efa88079edec",
+                "shasum": ""
+            },
+            "require": {
+                "easyframework/generics": "~2.0",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "codacy/coverage": "dev-master",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Collections\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ítalo Lelis de Vietro",
+                    "email": "italolelis@gmail.com"
+                }
+            ],
+            "description": "Collections Abstraction library for PHP",
+            "homepage": "https://github.com/italolelis/collections",
+            "keywords": [
+                "collection",
+                "easy",
+                "framework",
+                "generics"
+            ],
+            "support": {
+                "issues": "https://github.com/italolelis/collections/issues",
+                "source": "https://github.com/italolelis/collections/tree/master"
+            },
+            "abandoned": true,
+            "time": "2016-12-13T14:14:15+00:00"
+        },
+        {
+            "name": "easyframework/generics",
+            "version": "v2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/italolelis/generics.git",
+                "reference": "aa473480dc68b0daf9de4387a22a32cf254489e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/italolelis/generics/zipball/aa473480dc68b0daf9de4387a22a32cf254489e8",
+                "reference": "aa473480dc68b0daf9de4387a22a32cf254489e8",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ítalo Lelis de Vietro",
+                    "email": "italolelis@lellysinformatica.com"
+                }
+            ],
+            "description": "Easy Framework Generics Component",
+            "homepage": "http://easyframework.net/",
+            "keywords": [
+                "easy",
+                "framework",
+                "generics"
+            ],
+            "support": {
+                "issues": "https://github.com/italolelis/generics/issues",
+                "source": "https://github.com/italolelis/generics/tree/master"
+            },
+            "abandoned": true,
+            "time": "2015-12-17T15:36:11+00:00"
+        },
         {
             "name": "graham-campbell/result-type",
             "version": "v1.0.1",

@@ -15,8 +15,8 @@ class Route
 
     public function __construct(string $path, array $details, string $method)
     {
-        $this->http_host = $_SERVER["HTTP_HOST"];
-        $this->request_scheme = $_SERVER["REQUEST_SCHEME"];
+        $this->http_host = server("HTTP_HOST");
+        $this->request_scheme = server("REQUEST_SCHEME");
 
         $this->setMethod($method);
         $this->setPath($path);

@@ -12,7 +12,7 @@ class Request
 {
     public function getPath(): string
     {
-        $path = $_SERVER["REQUEST_URI"] ?? "/";
+        $path = server("REQUEST_URI") ?? "/";
         $position = strpos($path, "?");
 
         if ($position === false) {
@@ -24,7 +24,7 @@ class Request
 
     public function getMethod(): string
     {
-        return strtolower($_SERVER["REQUEST_METHOD"]);
+        return strtolower(server("REQUEST_METHOD"));
     }
 
     public function all(): Map

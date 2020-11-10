@@ -3,6 +3,11 @@
 use MasterStudents\Core\Application;
 use MasterStudents\Core\Config;
 
+function server($key = null)
+{
+    return is_null($key) ? $_SERVER : (isset($_SERVER[$key]) ? $_SERVER[$key] : false);
+}
+
 function env($prop)
 {
     return $_ENV[$prop] ?? false;
@@ -15,8 +20,10 @@ function config($prop)
 
 function baseUrl()
 {
-    $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
-    $host = $_SERVER["HTTP_HOST"];
+    if (server("HTTP_X_FORWARDED_PROTO") === false) $protocol = 'https://';
+    else $protocol = 'http://';
+
+    $host = server("HTTP_HOST");
     return "$protocol$host";
 }
 

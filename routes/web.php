@@ -16,7 +16,7 @@ $app->router->post("/contact", array("controller" => "ContactController::send", 
 
 $app->router->get("/server", array(
     "controller" => function ($request) {
-        var_dump($_SERVER);
+        var_dump(server());
     },
     "name" => "server"
 ));

@@ -13,3 +13,10 @@ $app->router->get("/about", array("controller" => "PagesController::about", "nam
 
 $app->router->get("/contact", array("controller" => "ContactController::index", "name" => "contact.index"));
 $app->router->post("/contact", array("controller" => "ContactController::send", "name" => "contact.send"));
+
+$app->router->get("/server", array(
+    "controller" => function ($request) {
+        var_dump($_SERVER);
+    },
+    "name" => "server"
+));

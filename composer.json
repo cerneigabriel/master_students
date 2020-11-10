@@ -15,10 +15,6 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.2",
-        "rakit/validation": "^1.4",
-        "doctrine/migrations": "^3.0",
-        "symfony/yaml": "^5.1",
-        "doctrine/orm": "^2.7",
-        "ocramius/proxy-manager": "^2.9"
+        "rakit/validation": "^1.4"
     }
 }

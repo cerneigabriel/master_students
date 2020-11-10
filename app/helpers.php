@@ -15,7 +15,9 @@ function config($prop)
 
 function baseUrl()
 {
-    return $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"];
+    $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
+    $host = $_SERVER["HTTP_HOST"];
+    return "$protocol$host";
 }
 
 function url(string $details)

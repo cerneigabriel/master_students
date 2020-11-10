@@ -20,8 +20,8 @@ function config($prop)
 
 function baseUrl()
 {
-    if (server("HTTP_X_FORWARDED_PROTO") === false) $protocol = 'https://';
-    else $protocol = 'http://';
+    if (server("HTTP_X_FORWARDED_PROTO") === false) $protocol = server("REQUEST_SCHEME") . '://';
+    else $protocol = server("HTTP_X_FORWARDED_PROTO") . '://';
 
     $host = server("HTTP_HOST");
     return "$protocol$host";

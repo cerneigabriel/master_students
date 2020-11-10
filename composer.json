@@ -10,8 +10,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "MasterStudents\\": "app/",
-            "Database\\": "database/"
+            "MasterStudents\\": "app/"
         }
     },
     "require": {

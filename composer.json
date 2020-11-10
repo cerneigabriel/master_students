@@ -10,12 +10,14 @@
     ],
     "autoload": {
         "psr-4": {
-            "MasterStudents\\": "app/"
+            "MasterStudents\\": "app/",
+            "Database\\": "database/"
         }
     },
     "require": {
         "vlucas/phpdotenv": "^5.2",
         "rakit/validation": "^1.4",
-        "easyframework/collections": "^7.0"
+        "doctrine/migrations": "^3.0",
+        "symfony/yaml": "^5.1"
     }
 }

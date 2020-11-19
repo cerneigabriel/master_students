@@ -9,6 +9,7 @@ use MasterStudents\Core\Request;
 use MasterStudents\Core\Route;
 use MasterStudents\Core\View;
 use Collections\Vector;
+use MasterStudents\Kernel;
 
 class Router
 {
@@ -43,6 +44,16 @@ class Router
         if (!$route) $route = $this->find(null, null, "error.404");
 
         $this->current_route = $route;
+
+        switch ($this->request->getMethod()) {
+            case "post":
+                (new Kernel)->runDefault();
+                break;
+        }
+
+        if (!empty($route->middlewares)) {
+            (new Kernel)->runMiddlewares($route->middlewares);
+        }
 
         return call_user_func($route->callback, $this->request);
     }

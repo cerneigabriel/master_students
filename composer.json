@@ -16,6 +16,10 @@
     "require": {
         "vlucas/phpdotenv": "^5.2",
         "rakit/validation": "^1.4",
-        "easyframework/collections": "^7.0"
+        "easyframework/collections": "^7.0",
+        "ikkez/f3-schema-builder": "dev-master",
+        "spiral/database": "^2.7",
+        "nesbot/carbon": "^2.41",
+        "rakit/session": "^1.0"
     }
 }

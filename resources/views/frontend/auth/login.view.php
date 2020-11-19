@@ -6,19 +6,25 @@
                     <h1>Login</h1>
                     <hr>
                     <form action="<?php echo url("auth.login") ?>" method="POST">
+                        <input type="hidden" name="session_id" value="<?php echo session()->get("session_id") ?>">
+
                         <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailhelp">
-                            <small id="emailhelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <label for="email">Email</label>
+                            <input type="email" name="email" class="form-control <?php echo isset($errors) && !is_null($errors->first("email")) ? "is-invalid" : ""; ?>" id="email" value="<?php echo isset($model) ? $model->get("email") : ""; ?>" aria-describedby="email_error">
+                            <div id="email_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("email") : ""; ?></div>
                         </div>
+
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control" id="password">
+                            <input type="password" name="password" class="form-control <?php echo isset($errors) && !is_null($errors->first("password")) ? "is-invalid" : ""; ?>" id="password" aria-describedby="password_error">
+                            <div id="password_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("password") : ""; ?></div>
                         </div>
+
                         <div class="form-group form-check">
                             <input type="checkbox" name="remember" class="form-check-input" id="remember">
                             <label class="form-check-label" for="remember">Remember</label>
                         </div>
+
                         <button type="submit" class="btn btn-primary">Sign in</button>
                     </form>
                 </div>

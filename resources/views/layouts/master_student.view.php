@@ -17,6 +17,33 @@
 </head>
 
 <body>
+
+    <?php if (session()->has("error")) : ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <?php
+            echo session()->get("error");
+            session()->forget("error");
+            ?>
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->has("success")) : ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?php
+            echo session()->get("success");
+            session()->forget("success");
+            ?>
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+
     <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand d-flex align-items-center" href="/">
             <img src="<?php echo assets("assets/images/icons/master_students_logo.png"); ?>" alt="" height="40px" class="mr-2">

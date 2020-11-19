@@ -6,6 +6,8 @@
                     <h1>Register</h1>
                     <hr>
                     <form action="<?php echo url("auth.register") ?>" method="POST">
+                        <input type="hidden" name="session_id" value="<?php echo session()->get("session_id") ?>">
+
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="first_name">First Name</label>
@@ -18,6 +20,12 @@
                                 <input type="text" name="last_name" class="form-control <?php echo isset($errors) && !is_null($errors->first("last_name")) ? "is-invalid" : ""; ?>" id="last_name" value="<?php echo isset($model) ? $model->get("last_name") : ""; ?>" aria-describedby="last_name_error">
                                 <div id="last_name_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("last_name") : ""; ?></div>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="first_name">Username</label>
+                            <input type="text" name="username" class="form-control <?php echo isset($errors) && !is_null($errors->first("username")) ? "is-invalid" : ""; ?>" id="username" value="<?php echo isset($model) ? $model->get("username") : ""; ?>" aria-describedby="username_error">
+                            <div id="username_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("username") : ""; ?></div>
                         </div>
 
                         <div class="form-group">
@@ -40,50 +48,6 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="birthdate">Birthdate</label>
-                                <input type="date" name="birthdate" class="form-control <?php echo isset($errors) && !is_null($errors->first("birthdate")) ? "is-invalid" : ""; ?>" id="birthdate" value="<?php echo isset($model) ? $model->get("birthdate") : ""; ?>" aria-describedby="birthdate_error">
-                                <div id="birthdate_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("birthdate") : ""; ?></div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="phone">Phone</label>
-                                <input type="phone" name="phone" class="form-control <?php echo isset($errors) && !is_null($errors->first("phone")) ? "is-invalid" : ""; ?>" id="phone" value="<?php echo isset($model) ? $model->get("phone") : ""; ?>" aria-describedby="phone_error">
-                                <div id="phone_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("phone") : ""; ?></div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="company">Company</label>
-                                <input type="text" name="company" class="form-control <?php echo isset($errors) && !is_null($errors->first("company")) ? "is-invalid" : ""; ?>" id="company" value="<?php echo isset($model) ? $model->get("company") : ""; ?>" aria-describedby="company_error">
-                                <div id="company_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("company") : ""; ?></div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="speciality">Speciality</label>
-                                <input type="text" name="speciality" class="form-control <?php echo isset($errors) && !is_null($errors->first("speciality")) ? "is-invalid" : ""; ?>" id="speciality" value="<?php echo isset($model) ? $model->get("speciality") : ""; ?>" aria-describedby="speciality_error">
-                                <div id="speciality_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("speciality") : ""; ?></div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <input type="text" name="gender" class="form-control <?php echo isset($errors) && !is_null($errors->first("gender")) ? "is-invalid" : ""; ?>" id="gender" value="<?php echo isset($model) ? $model->get("gender") : ""; ?>" aria-describedby="gender_error">
-                            <div id="gender_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("gender") : ""; ?></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="notes">Notes</label>
-                            <textarea row="30" name="notes" class="form-control <?php echo isset($errors) && !is_null($errors->first("notes")) ? "is-invalid" : ""; ?>" id="notes" aria-describedby="notes_error">
-                                <?php echo isset($model) ? $model->get("notes") : ""; ?>
-                            </textarea>
-                            <div id="notes_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("notes") : ""; ?></div>
-                        </div>
-
-
-
                         <button type="submit" class="btn btn-primary">Sign up</button>
                     </form>
                 </div>
@@ -91,3 +55,5 @@
         </div>
     </div>
 </div>
+
+<script src="<?php echo assets("assets/js/auth/register.js"); ?>"></script>

@@ -3,6 +3,26 @@
 use MasterStudents\Core\Application;
 use MasterStudents\Core\Config;
 
+function app()
+{
+    return Application::$app;
+}
+
+function auth()
+{
+    return app()->auth;
+}
+
+function session()
+{
+    return app()->session;
+}
+
+function router()
+{
+    return app()->router;
+}
+
 function server($key = null)
 {
     return is_null($key) ? $_SERVER : (isset($_SERVER[$key]) ? $_SERVER[$key] : false);
@@ -29,8 +49,8 @@ function baseUrl()
 
 function url(string $details)
 {
-    $route = Application::$app->router->find($details);
-    if (is_null($route)) $route = Application::$app->router->find(null, null, $details);
+    $route = app()->router->find($details);
+    if (is_null($route)) $route = app()->router->find(null, null, $details);
 
     return baseUrl() . $route->path;
 }
@@ -41,12 +61,12 @@ function assets(string $path)
     return baseUrl() . $path;
 }
 
-function router()
-{
-    return Application::$app->router;
-}
-
 function response()
 {
-    return Application::$app->response;
+    return app()->response;
+}
+
+function request()
+{
+    return app()->request;
 }

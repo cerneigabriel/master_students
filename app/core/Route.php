@@ -12,6 +12,7 @@ class Route
     public $method = null;
     public $path = null;
     public $callback = null;
+    public $middlewares = [];
 
     public function __construct(string $path, array $details, string $method)
     {
@@ -23,6 +24,7 @@ class Route
 
         if (isset($details["controller"])) $this->setController($details["controller"]);
         if (isset($details["name"])) $this->setName($details["name"]);
+        if (isset($details["middlewares"])) $this->setMiddlewares($details["middlewares"]);
 
         return $this;
     }
@@ -71,5 +73,15 @@ class Route
     {
         $this->method = $method;
         return $this;
+    }
+
+    private function setMiddlewares($middlewares)
+    {
+        $this->middlewares = $middlewares;
+    }
+
+    public function url()
+    {
+        return url($this->name);
     }
 }

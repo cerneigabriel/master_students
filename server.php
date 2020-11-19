@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 define("BASE_PATH", __DIR__ . "/");
 define("APP_PATH", BASE_PATH . "app/");
 define("VENDOR_PATH", BASE_PATH . "vendor/");
@@ -11,17 +7,16 @@ define("ROUTES_PATH", BASE_PATH . "routes/");
 define("VIEWS_PATH", BASE_PATH . "resources/views/");
 define("LAYOUTS_PATH", VIEWS_PATH . "layouts/");
 define("CONFIG_PATH", BASE_PATH . "config/");
+define("DATABASE_PATH", BASE_PATH . "database/");
+define("MIGRATIONS_PATH", BASE_PATH . "database/migrations/");
 
 
 require_once VENDOR_PATH . "autoload.php";
-require_once APP_PATH . "helpers.php";
-
-// var_dump(server());
 
 use MasterStudents\Core\Application;
 
 $app = new Application(BASE_PATH);
 
-require_once ROUTES_PATH . "web.php";
 
-$app->run();
+if (!isset($run_migrations))
+    $app->run();

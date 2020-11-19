@@ -1,0 +1,4 @@
+// After migrating tables, where you'll need some references, add these lines of code and edit them as you like.
+SET FOREIGN_KEY_CHECKS=0;
+ALTER TABLE `sessions` ADD  CONSTRAINT `user_session_fk` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1

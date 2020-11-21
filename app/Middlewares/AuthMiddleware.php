@@ -2,15 +2,17 @@
 
 namespace MasterStudents\Middlewares;
 
+use Closure;
+use MasterStudents\Core\Auth;
 use MasterStudents\Core\Request;
 
 class AuthMiddleware
 {
     public function handle(Request $request)
     {
-        if (auth()->check() && !is_null(session()->getAuthenticatedSession()) && session()->getAuthenticatedSession()["active"] == true)
+        if (Auth::check())
             return true;
 
-        return false;
+        return response()->redirect(url("auth.login"));
     }
 }

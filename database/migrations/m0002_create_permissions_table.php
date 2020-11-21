@@ -14,8 +14,8 @@ class m0002_create_permissions_table extends Migration
             $schema->string("key")->nullable(false);
             $schema->string("name")->nullable(false);
 
-            $schema->column("created_at")->timestamp()->nullable(false);
-            $schema->column("updated_at")->timestamp()->nullable(false);
+            $schema->timestamp("created_at")->nullable(false);
+            $schema->timestamp("updated_at")->nullable(false);
 
             $schema->index(["key"])->unique(true);
 

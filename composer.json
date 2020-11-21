@@ -20,6 +20,7 @@
         "ikkez/f3-schema-builder": "dev-master",
         "spiral/database": "^2.7",
         "nesbot/carbon": "^2.41",
-        "rakit/session": "^1.0"
+        "rakit/session": "^1.0",
+        "peppeocchi/php-cron-scheduler": "^3.1"
     }
 }

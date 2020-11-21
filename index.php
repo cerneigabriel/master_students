@@ -1,3 +1,4 @@
 <?php
 
 Header("Location: /");
+exit;

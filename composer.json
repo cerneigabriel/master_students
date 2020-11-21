@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "MasterStudents\\": "./"
+            "MasterStudents\\": "app/"
         }
     },
     "require": {
@@ -19,10 +19,7 @@
         "easyframework/collections": "^7.0",
         "ikkez/f3-schema-builder": "dev-master",
         "spiral/database": "^2.7",
-        "nesbot/carbon": "^2.41"
-    },
-    "scripts": {
-        "push": "git add . && git commit -m 'deploy_on_heroku' && git push origin master",
-        "heroku_deploy": "git push heroku HEAD:master"
+        "nesbot/carbon": "^2.41",
+        "rakit/session": "^1.0"
     }
 }

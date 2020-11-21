@@ -3,8 +3,6 @@
 namespace MasterStudents\Core;
 
 use Dotenv\Dotenv;
-use GO\Scheduler;
-use MasterStudents\Jobs\SessionsCheckerJob;
 
 class Application
 {
@@ -38,12 +36,9 @@ class Application
             $this->session = new Session();
             $this->hash = new Hash();
             $this->auth = new Auth();
-            $this->scheduler = new Scheduler();
 
 
-            $this
-                ->initiateWebRoutes()
-                ->setJobs();
+            $this->initiateWebRoutes();
         }
 
         return $this;
@@ -77,12 +72,5 @@ class Application
     {
         date_default_timezone_set($timezone);
         return $this;
-    }
-
-    public function setJobs()
-    {
-        // $this->scheduler->call(function () {
-        //     (new SessionsCheckerJob())->run();
-        // })->everyMinute();
     }
 }

@@ -768,16 +768,16 @@
         },
         {
             "name": "spiral/database",
-            "version": "v2.7.19",
+            "version": "v2.7.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/database.git",
-                "reference": "33e6db63b86238fedeb697bffb28489f0d0dc2d5"
+                "reference": "5ae0a627f37428520b24391683df29f97c7ae7f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/database/zipball/33e6db63b86238fedeb697bffb28489f0d0dc2d5",
-                "reference": "33e6db63b86238fedeb697bffb28489f0d0dc2d5",
+                "url": "https://api.github.com/repos/spiral/database/zipball/5ae0a627f37428520b24391683df29f97c7ae7f9",
+                "reference": "5ae0a627f37428520b24391683df29f97c7ae7f9",
                 "shasum": ""
             },
             "require": {
@@ -813,9 +813,9 @@
             "description": "DBAL, schema introspection, migration and pagination",
             "support": {
                 "issues": "https://github.com/spiral/database/issues",
-                "source": "https://github.com/spiral/database/tree/v2.7.19"
+                "source": "https://github.com/spiral/database/tree/v2.7.20"
             },
-            "time": "2020-11-10T09:33:43+00:00"
+            "time": "2020-11-20T14:49:27+00:00"
         },
         {
             "name": "spiral/logger",

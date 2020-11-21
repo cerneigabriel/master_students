@@ -51,6 +51,6 @@ class Hash
 
     private function getDrivers()
     {
-        return new Map($this->drivers);
+        return map($this->drivers);
     }
 }

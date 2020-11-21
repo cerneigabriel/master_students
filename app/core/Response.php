@@ -27,5 +27,6 @@ class Response
     public function redirect($path)
     {
         Header("Location: $path");
+        exit();
     }
 }

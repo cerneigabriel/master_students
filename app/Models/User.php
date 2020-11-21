@@ -17,6 +17,7 @@ class User extends Model
         "last_name",
         "email",
         "password",
+        "email_verified",
         "birthdate",
         "phone",
         "company",
@@ -32,7 +33,6 @@ class User extends Model
         "last_name" => "string",
         "email" => "string",
         "password" => "string",
-        "remember_token" => "string",
         "email_verified" => "boolean",
         "birth_date" => "string",
         "phone" => "string",
@@ -79,15 +79,49 @@ class User extends Model
 
     public static function loginRules()
     {
-        $emails = (new Map((new self)->repository->select()->columns("email")->fetchAll()))->map(fn ($value) => ($value["email"]))->toArray();
-
         return [
-            "email" => ["required", "in:" . implode(",", $emails)]
+            "email" => ["required", "exists_in_table:users,email"]
         ] + array_filter(self::rules(), function ($value, $key) {
             return in_array($key, [
                 "email",
                 "password",
             ]);
         }, ARRAY_FILTER_USE_BOTH);
+    }
+
+    public function roles()
+    {
+        return $this->query(function ($query) {
+            return $query
+                ->table("roles")
+                ->innerJoin('user_role')
+                ->on(['roles.id' => 'user_role.role_id'])
+                ->onWhere('user_role.user_id', $this->id);
+        })->get();
+    }
+
+    public function sessions()
+    {
+        return $this->query(function ($query) {
+            return $query
+                ->table("sessions")
+                ->onWhere('sessions.user_id', $this->id);
+        })->get();
+    }
+
+    public function permissions()
+    {
+        return $this->query(function ($query) {
+            return $query
+                ->table("permissions")
+
+                ->innerJoin('role_permission')
+                ->on(['permissions.id' => 'role_permission.permission_id'])
+
+                ->innerJoin('user_role')
+                ->on(['role_permission.role_id' => 'user_role.role_id'])
+
+                ->onWhere('user_role.user_id', $this->id);
+        })->get();
     }
 }

@@ -16,7 +16,6 @@ class m0000_create_users_table extends Migration
             $schema->string("last_name", 50)->nullable(false);
             $schema->string("email", 100)->nullable(false);
             $schema->string("password")->nullable(false);
-            $schema->string("remember_token");
             $schema->boolean("email_verified")->nullable(false)->defaultValue(0);
             $schema->date("birth_date");
             $schema->string("phone", 20);
@@ -26,8 +25,8 @@ class m0000_create_users_table extends Migration
             $schema->text("notes");
             $schema->string("zoom_link");
 
-            $schema->column("created_at")->timestamp()->nullable(false);
-            $schema->column("updated_at")->timestamp()->nullable(false);
+            $schema->timestamp("created_at")->nullable(false);
+            $schema->timestamp("updated_at")->nullable(false);
 
             $schema->index(["username", "email"])->unique(true);
 

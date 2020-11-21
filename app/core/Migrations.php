@@ -70,7 +70,7 @@ class Migrations
 
     protected function getMigrations(): array
     {
-        $migrations = new Map(scandir(MIGRATIONS_PATH));
+        $migrations = map(scandir(MIGRATIONS_PATH));
 
         $migrations = $migrations->filter(fn ($value) => ($value !== "." && $value !== ".."))->map(fn ($value) => (pathinfo($value, PATHINFO_FILENAME)));
 
@@ -79,7 +79,7 @@ class Migrations
 
     protected function getMigratedMigrations(): array
     {
-        $migrations = new Map($this->repository->select()->columns("migration")->fetchAll());
+        $migrations = map($this->repository->select()->columns("migration")->fetchAll());
 
         $migrations = $migrations->map(fn ($value) => ($value["migration"]));
 

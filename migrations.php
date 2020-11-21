@@ -4,14 +4,11 @@
  * 
  * Migrations
  */
-
 $run_migrations = true;
 
-require_once "./server.php";
+require_once "server.php";
 
-$database = $app->migrations;
-
-$database->migrate();
+$app->migrations->migrate();
 
 // $db = $database->dbm;
 

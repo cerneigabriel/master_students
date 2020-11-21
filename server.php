@@ -15,7 +15,7 @@ require_once VENDOR_PATH . "autoload.php";
 
 use MasterStudents\Core\Application;
 
-$app = new Application(BASE_PATH);
+$app = new Application(BASE_PATH, $run_migrations ?? false);
 
 
 if (!isset($run_migrations))

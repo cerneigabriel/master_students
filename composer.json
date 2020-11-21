@@ -22,6 +22,7 @@
         "nesbot/carbon": "^2.41"
     },
     "scripts": {
-        "heroku_deploy": "git add . && git commit -m 'deploy_on_heroku' && git push origin master && git push heroku HEAD:master"
+        "push": "git add . && git commit -m 'deploy_on_heroku' && git push origin master",
+        "heroku_deploy": "git push heroku HEAD:master"
     }
 }

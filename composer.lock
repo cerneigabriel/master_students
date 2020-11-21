@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05bd0c9df65326a5c7a5048dc42866cb",
+    "content-hash": "3c32a733e31457f29fdfde66435aa5db",
     "packages": [
         {
             "name": "bcosca/fatfree-core",
@@ -40,64 +40,6 @@
                 "source": "https://github.com/bcosca/fatfree-core/tree/3.7.2"
             },
             "time": "2020-05-28T16:14:27+00:00"
-        },
-        {
-            "name": "dragonmantank/cron-expression",
-            "version": "v3.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dragonmantank/cron-expression.git",
-                "reference": "48212cdc0a79051d50d7fc2f0645c5a321caf926"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/48212cdc0a79051d50d7fc2f0645c5a321caf926",
-                "reference": "48212cdc0a79051d50d7fc2f0645c5a321caf926",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1|^8.0"
-            },
-            "replace": {
-                "mtdowling/cron-expression": "^1.0"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^0.11|^0.12",
-                "phpunit/phpunit": "^7.0|^8.0|^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Cron\\": "src/Cron/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Tankersley",
-                    "email": "chris@ctankersley.com",
-                    "homepage": "https://github.com/dragonmantank"
-                }
-            ],
-            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
-            "keywords": [
-                "cron",
-                "schedule"
-            ],
-            "support": {
-                "issues": "https://github.com/dragonmantank/cron-expression/issues",
-                "source": "https://github.com/dragonmantank/cron-expression/tree/v3.0.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/dragonmantank",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-10-13T01:26:01+00:00"
         },
         {
             "name": "easyframework/collections",
@@ -407,65 +349,6 @@
             "time": "2020-10-23T06:02:30+00:00"
         },
         {
-            "name": "peppeocchi/php-cron-scheduler",
-            "version": "v3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/peppeocchi/php-cron-scheduler.git",
-                "reference": "18fcf4c98d4cf0cd4f3eb64728a8b0d082bbc2f9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/peppeocchi/php-cron-scheduler/zipball/18fcf4c98d4cf0cd4f3eb64728a8b0d082bbc2f9",
-                "reference": "18fcf4c98d4cf0cd4f3eb64728a8b0d082bbc2f9",
-                "shasum": ""
-            },
-            "require": {
-                "dragonmantank/cron-expression": "^3.0",
-                "php": "^7.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.7",
-                "satooshi/php-coveralls": "^1.0",
-                "swiftmailer/swiftmailer": "~5.4 || ^6.0"
-            },
-            "suggest": {
-                "swiftmailer/swiftmailer": "Required to send the output of a job to email address/es (~5.4 || ^6.0)."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GO\\": "src/GO/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Giuseppe Occhipinti",
-                    "email": "peppeocchi@gmail.com"
-                },
-                {
-                    "name": "Carsten Windler",
-                    "email": "carsten@carstenwindler.de",
-                    "homepage": "http://carstenwindler.de",
-                    "role": "Contributor"
-                }
-            ],
-            "description": "PHP Cron Job Scheduler",
-            "keywords": [
-                "cron job",
-                "scheduler"
-            ],
-            "support": {
-                "issues": "https://github.com/peppeocchi/php-cron-scheduler/issues",
-                "source": "https://github.com/peppeocchi/php-cron-scheduler/tree/v3.1"
-            },
-            "time": "2020-10-19T09:21:17+00:00"
-        },
-        {
             "name": "phpoption/phpoption",
             "version": "1.7.5",
             "source": {
@@ -636,43 +519,6 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.3"
             },
             "time": "2020-03-23T09:12:05+00:00"
-        },
-        {
-            "name": "rakit/session",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rakit/session.git",
-                "reference": "e587de2f01ef07828db31372c2294058162244cf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rakit/session/zipball/e587de2f01ef07828db31372c2294058162244cf",
-                "reference": "e587de2f01ef07828db31372c2294058162244cf",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Rakit\\Session\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Muhammad Syifa",
-                    "email": "emsifa@gmail.com"
-                }
-            ],
-            "description": "Session manager providing PDO, Cookie, and File drivers",
-            "support": {
-                "issues": "https://github.com/rakit/session/issues",
-                "source": "https://github.com/rakit/session/tree/master"
-            },
-            "time": "2016-01-15T08:18:27+00:00"
         },
         {
             "name": "rakit/validation",

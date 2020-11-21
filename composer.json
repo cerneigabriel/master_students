@@ -9,11 +9,8 @@
         }
     ],
     "autoload": {
-        "classmap": [
-            "database"
-        ],
         "psr-4": {
-            "MasterStudents\\": "app/"
+            "MasterStudents\\": "./app/"
         }
     },
     "require": {
@@ -23,5 +20,8 @@
         "ikkez/f3-schema-builder": "dev-master",
         "spiral/database": "^2.7",
         "nesbot/carbon": "^2.41"
+    },
+    "scripts": {
+        "heroku_deploy": "git add . && git commit -m 'deploy_on_heroku' && git push origin master && git push heroku HEAD:master"
     }
 }

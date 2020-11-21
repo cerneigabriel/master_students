@@ -14,8 +14,8 @@ class m0001_create_roles_table extends Migration
             $schema->string("key", 50)->nullable(false);
             $schema->string("name", 100)->nullable(false);
 
-            $schema->column("created_at")->timestamp()->nullable(false);
-            $schema->column("updated_at")->timestamp()->nullable(false);
+            $schema->timestamp("created_at")->nullable(false);
+            $schema->timestamp("updated_at")->nullable(false);
 
             $schema->index(["key"])->unique(true);
 

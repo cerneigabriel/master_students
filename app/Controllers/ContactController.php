@@ -16,7 +16,6 @@ class ContactController extends Controller
 
     public function send(Request $request)
     {
-        var_dump($request->all()->toArray());
         return "Form submited";
     }
 }

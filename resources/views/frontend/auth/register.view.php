@@ -1,3 +1,7 @@
+<?php
+
+use MasterStudents\Core\Session;
+?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -6,7 +10,7 @@
                     <h1>Register</h1>
                     <hr>
                     <form action="<?php echo url("auth.register") ?>" method="POST">
-                        <input type="hidden" name="session_id" value="<?php echo session()->get("session_id") ?>">
+                        <input type="hidden" name="_token" value="<?php echo Session::get("_token") ?>">
 
                         <div class="form-row">
                             <div class="form-group col-md-6">

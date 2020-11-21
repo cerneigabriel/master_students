@@ -45,14 +45,11 @@ class Router
 
         $this->current_route = $route;
 
-        switch ($this->request->getMethod()) {
-            case "post":
-                (new Kernel)->runDefault();
-                break;
-        }
+        if ($this->request->getMethod() === "get") (new Kernel)->runWebDefault($this->request);
+        if ($this->request->getMethod() === "post") (new Kernel)->runDefault($this->request);
 
         if (!empty($route->middlewares)) {
-            (new Kernel)->runMiddlewares($route->middlewares);
+            (new Kernel)->runMiddlewares($this->request, $route->middlewares);
         }
 
         return call_user_func($route->callback, $this->request);

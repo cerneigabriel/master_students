@@ -2,31 +2,42 @@
 
 namespace MasterStudents;
 
+use MasterStudents\Core\Request;
 use MasterStudents\Middlewares\CSRFMiddleware;
+use MasterStudents\Middlewares\SessionsCheckerMiddleware;
 
 class Kernel
 {
-    protected $middlewares = [
-        "csrf" => CSRFMiddleware::class
-    ];
-
     protected $defaultMiddlewares = [
         CSRFMiddleware::class
     ];
 
-    public function runDefault()
+    protected $webDefault = [
+        SessionsCheckerMiddleware::class
+    ];
+
+    public function runDefault(Request $request)
     {
-        $this->runMiddlewares($this->defaultMiddlewares);
+        $this->runMiddlewares($request, $this->defaultMiddlewares);
     }
 
-    public function runMiddlewares($middlewares)
+    public function runWebDefault(Request $request)
     {
-        foreach ($middlewares as $middleware) {
-            if ((new $middleware)->handle(request())) {
-                continue;
-            } else {
-                return response()->redirect(url("error.401"));
-            }
+        $this->runMiddlewares($request, $this->webDefault);
+    }
+
+    public function runMiddlewares(Request $request, $middlewares)
+    {
+        for ($index = 0; $index < count($middlewares); $index++) {
+            $middleware = $middlewares[$index];
+            $middleware = new $middleware();
+
+            $runNext = false;
+
+            $runNext = $middleware->handle($request);
+
+            if ($runNext === true) continue;
+            else break;
         }
     }
 }

@@ -1,3 +1,7 @@
+<?php
+
+use MasterStudents\Core\Session;
+?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-5">
@@ -6,7 +10,7 @@
                     <h1>Login</h1>
                     <hr>
                     <form action="<?php echo url("auth.login") ?>" method="POST">
-                        <input type="hidden" name="session_id" value="<?php echo session()->get("session_id") ?>">
+                        <input type="hidden" name="_token" value="<?php echo Session::get("_token") ?>">
 
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -21,8 +25,8 @@
                         </div>
 
                         <div class="form-group form-check">
-                            <input type="checkbox" name="remember" class="form-check-input" id="remember">
-                            <label class="form-check-label" for="remember">Remember</label>
+                            <input type="checkbox" name="remember_me" class="form-check-input" id="remember_me" value="true">
+                            <label class="form-check-label" for="remember_me">Remember Me</label>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Sign in</button>

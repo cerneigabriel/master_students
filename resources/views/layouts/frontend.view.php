@@ -1,10 +1,15 @@
+<?php
+
+use MasterStudents\Core\Auth;
+use MasterStudents\Core\Session;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="session_id" content="<?php echo session()->get("session_id") ?>">
+    <meta name="_token" content="<?php echo Session::get("_token") ?>">
     <title><?php echo config("app.app_name") ?></title>
 
     <!-- Styles -->
@@ -17,6 +22,25 @@
 </head>
 
 <body>
+    <?php foreach ([
+        "error" => "alert alert-danger alert-dismissible fade show",
+        "warning" => "alert alert-warning alert-dismissible fade show",
+        "success" => "alert alert-success alert-dismissible fade show",
+        "info" => "alert alert-info alert-dismissible fade show",
+    ] as $type => $alert) : ?>
+        <?php if (Session::has($type)) : ?>
+            <div class="<?php echo $alert ?>" role="alert">
+                <?php
+                echo Session::get($type);
+                Session::forget($type);
+                ?>
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
     <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand d-flex align-items-center" href="/">
             <img src="<?php echo assets("assets/images/icons/master_students_logo.png"); ?>" alt="" height="40px" class="mr-2">
@@ -32,9 +56,9 @@
                 <a class="nav-link <?php echo router()->current_route->name == "contact.index" ? "active" : ""; ?>" href="<?php echo url("contact.index"); ?>">Contact</a>
             </div>
             <div class="navbar-nav ml-auto">
-                <?php if (auth()->check()) : ?>
+                <?php if (Auth::check()) : ?>
                     <form action="<?php echo url("auth.logout"); ?>" method="post">
-                        <input type="hidden" name="session_id" value="<?php echo session()->get("session_id") ?>">
+                        <input type="hidden" name="_token" value="<?php echo Session::get("_token") ?>">
 
                         <button type="submit" class="btn btn-link nav-link">Logout</button>
                     </form>
@@ -49,10 +73,6 @@
     {{ content }}
 
     <script src="<?php echo assets("assets/js/app.js"); ?>"></script>
-    <script>
-        var headers = new Headers();
-        headers.set("session_id", <?php echo session()->get("session_id") ?>);
-    </script>
 </body>
 
 </html>

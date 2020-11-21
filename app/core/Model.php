@@ -55,6 +55,19 @@ abstract class Model
         return $this;
     }
 
+    private function update(array $data)
+    {
+        if ($this->timestamps && !$this->hasTimestamps($data))
+            $data = $this->setUpdatedAt($data, Carbon::now());
+
+        $this->repository->update($data)->where($this->primaryKey, $this->id)->run();
+        $result = $this->repository->where($this->primaryKey, $this->id)->fetchAll();
+
+        if (!empty($result)) return $this->convert($result[0]);
+
+        return $this;
+    }
+
     private function find($id)
     {
         $result = $this->repository->where($this->primaryKey, $id)->fetchAll();
@@ -64,7 +77,7 @@ abstract class Model
         return $this;
     }
 
-    private function query($fn)
+    private function query(callable $fn)
     {
         $this->result = $fn($this->repository)->fetchAll();
 
@@ -88,7 +101,10 @@ abstract class Model
         foreach ($instance as $property => $value) {
 
             if (isset($this->casts[$property])) {
-                settype($value, $class->casts[$property]);
+                if ($this->casts[$property] === "json")
+                    $value = (array) json_decode($value);
+                else
+                    settype($value, $class->casts[$property]);
             }
 
             $class->{$property} = $value;
@@ -112,10 +128,15 @@ abstract class Model
         return isset($data["created_at"]) && isset($data["updated_at"]);
     }
 
-    public function setTimestamps(array $data, Carbon $timestamp): array
+    public function setTimestamps(array $data, Carbon $timestamp)
     {
         $data["created_at"] = $data["updated_at"] = $timestamp->toDateTimeString();
+        return $data;
+    }
 
+    public function setUpdatedAt(array $data, Carbon $timestamp)
+    {
+        $data["updated_at"] = $timestamp->toDateTimeString();
         return $data;
     }
 }

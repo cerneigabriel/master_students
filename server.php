@@ -11,6 +11,7 @@ define("DATABASE_PATH", BASE_PATH . "database/");
 define("MIGRATIONS_PATH", BASE_PATH . "database/migrations/");
 
 
+var_dump(VENDOR_PATH . "autoload.php");
 require_once VENDOR_PATH . "autoload.php";
 
 use MasterStudents\Core\Application;

@@ -8,7 +8,7 @@
             "email": "40870657+cerneigabriel@users.noreply.github.com"
         }
     ],
-    "autoload": {
+    "autoload-dev": {
         "psr-4": {
             "MasterStudents\\": "app/"
         }

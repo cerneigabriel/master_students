@@ -13,9 +13,21 @@ define("MIGRATIONS_PATH", BASE_PATH . "database/migrations/");
 
 require_once VENDOR_PATH . "autoload.php";
 
-use MasterStudents\Core\Application;
+var_dump([
+    BASE_PATH,
+    APP_PATH,
+    VENDOR_PATH,
+    ROUTES_PATH,
+    VIEWS_PATH,
+    LAYOUTS_PATH,
+    CONFIG_PATH,
+    DATABASE_PATH,
+    MIGRATIONS_PATH,
+]);
 
-$app = new Application(BASE_PATH, $run_migrations ?? false);
+// use MasterStudents\Core\Application;
 
-if (!isset($run_migrations))
-    $app->run();
+// $app = new Application(BASE_PATH, $run_migrations ?? false);
+
+// if (!isset($run_migrations))
+//     $app->run();

@@ -1,6 +1,7 @@
 {
     "name": "cerne/master_students",
-    "description": "Management platform for master students",
+    "description": "Management system for master students",
+    "type": "project",
     "license": "MIT License",
     "authors": [
         {

@@ -47,7 +47,6 @@ class Application
     public function run()
     {
         echo $this->router->resolve();
-        $this->scheduler->run();
     }
 
     public function initiateDotenv()

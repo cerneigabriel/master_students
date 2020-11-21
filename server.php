@@ -23,6 +23,7 @@ var_dump([
     CONFIG_PATH,
     DATABASE_PATH,
     MIGRATIONS_PATH,
+    (new ReflectionClass(\MasterStudents\Core\Application::class))->getFileName()
 ]);
 
 // use MasterStudents\Core\Application;

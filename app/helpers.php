@@ -1,11 +1,17 @@
 <?php
 
+use Collections\Map;
 use MasterStudents\Core\Application;
 use MasterStudents\Core\Config;
 
 function app()
 {
     return Application::$app;
+}
+
+function database()
+{
+    return app()->database;
 }
 
 function auth()
@@ -16,6 +22,11 @@ function auth()
 function session()
 {
     return app()->session;
+}
+
+function scheduler()
+{
+    return app()->scheduler;
 }
 
 function router()
@@ -69,4 +80,9 @@ function response()
 function request()
 {
     return app()->request;
+}
+
+function map($items = [])
+{
+    return new Map($items);
 }

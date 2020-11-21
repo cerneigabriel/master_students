@@ -13,11 +13,18 @@ class ErrorsController extends Controller
         "400" => "frontend.errors.400",
         "200" => "frontend.errors.200",
         "201" => "frontend.errors.201",
+        "500" => "frontend.errors.500",
     ];
 
     public function handle404()
     {
         response()->setStatusCode(404);
         return View::view($this->views["404"])->render();
+    }
+
+    public function handle500()
+    {
+        response()->setStatusCode(500);
+        return View::view($this->views["500"])->render();
     }
 }

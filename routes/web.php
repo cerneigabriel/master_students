@@ -5,19 +5,17 @@
  * Web Routes
  */
 
-require_once ROUTES_PATH . "auth.php";
-require_once ROUTES_PATH . "profile.php";
-require_once ROUTES_PATH . "errors.php";
+// Api Routes
+require_once ROUTES_PATH . "collections/api.php";
 
-router()->get("/", array("controller" => "PagesController::index", "name" => "home"));
-router()->get("/about", array("controller" => "PagesController::about", "name" => "about"));
+// Auth Routes
+require_once ROUTES_PATH . "collections/auth.php";
 
-router()->get("/contact", array("controller" => "ContactController::index", "name" => "contact.index"));
-router()->post("/contact", array("controller" => "ContactController::send", "name" => "contact.send"));
+// Profile Routes
+require_once ROUTES_PATH . "collections/profile.php";
 
-router()->get("/server", array(
-    "controller" => function ($request) {
-        var_dump(server());
-    },
-    "name" => "server"
-));
+// Errors Handlers Routes
+require_once ROUTES_PATH . "collections/errors.php";
+
+// Front-End Routes
+require_once ROUTES_PATH . "collections/frontend.php";

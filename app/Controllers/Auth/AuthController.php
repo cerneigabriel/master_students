@@ -11,6 +11,7 @@ use MasterStudents\Models\User;
 // Models
 use MasterStudents\Core\Request;
 use MasterStudents\Core\Controller;
+use MasterStudents\Core\Session;
 use MasterStudents\Core\Traits\DatabaseManagerTrait;
 
 class AuthController extends Controller
@@ -25,24 +26,18 @@ class AuthController extends Controller
     public function loginAttempt(Request $request)
     {
         $validator = $request->validate(User::loginRules());
-        $request = $request->all();
 
-        if ($validator->fails()) {
-            return View::view("frontend.auth.login", [
-                "errors" => $validator->errors(),
-                "model" => $request
-            ])->render();
-        }
+        if ($validator->fails()) return $this->handleErrorWithView($validator, $request, "frontend.auth.login");
 
-        $user = User::query(fn ($query) => ($query->where("email", $request->get("email"))))->first();
+        $remember_me = filter_var($request->get("remember_me", false), FILTER_VALIDATE_BOOLEAN);
 
-        if (auth()->attempt($user, $request->get("password"))) {
-            session()->set("success", "You are logged in.");
+        if (Auth::loginAttempt($request->get("email"), $request->get("password"), $remember_me)) {
+            Session::set("success", "You are logged in.");
 
             return response()->redirect(url("profile.index"));
         }
 
-        session()->set("error", "Email or password does not match our records.");
+        Session::set("error", "Email or password does not match our records.");
 
         return View::view("frontend.auth.login", [
             "errors" => $validator->errors(),
@@ -58,16 +53,10 @@ class AuthController extends Controller
     public function registerAttempt(Request $request)
     {
         $validator = $request->validate(User::registrationRules());
-        $request = $request->all();
 
-        if ($validator->fails()) {
-            return View::view("frontend.auth.register", [
-                "errors" => $validator->errors(),
-                "model" => $request
-            ])->render();
-        }
+        if ($validator->fails()) return $this->handleErrorWithView($validator, $request, "auth.register");
 
-        $user = User::create([
+        User::create([
             "username" => $request->get("username"),
             "first_name" => $request->get("first_name"),
             "last_name" => $request->get("last_name"),
@@ -80,24 +69,22 @@ class AuthController extends Controller
 
     public function logoutAttempt(Request $request)
     {
-        auth()->logout();
+        if (Auth::logoutAttempt()) {
+            Session::set("success", "You are logged out successfuly.");
 
-        return response()->redirect(url("auth.login"));
+            return response()->redirect(url("auth.login"));
+        }
+
+        return response()->redirect(url("error.500"));
     }
 
     public function checkUsername(Request $request)
     {
-        $usernameRule = [(new Map(User::rules()))->get("username")];
+        $usernameRule = [map(User::rules())->get("username")];
 
         $validator = $request->validate($usernameRule);
-        $request = $request->all();
 
-        if ($validator->fails()) {
-            return response()->json([
-                "status" => 401,
-                "errors" => $validator->errors(),
-            ], 401);
-        }
+        if ($validator->fails()) return $this->handleErrorWithJSON($validator, 401);
 
         return response()->json([
             "status" => 200,

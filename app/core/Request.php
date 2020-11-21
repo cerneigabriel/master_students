@@ -4,9 +4,8 @@ namespace MasterStudents\Core;
 
 use Collections\Map;
 use Collections\Pair;
-use Collections\Vector;
+use MasterStudents\Core\Validation\ExistsInTableRule;
 use MasterStudents\Core\Validation\UniqueRule;
-use Rakit\Validation\Validation;
 use Rakit\Validation\Validator;
 
 class Request
@@ -38,16 +37,16 @@ class Request
         switch ($this->getMethod()) {
             case "post":
                 $input_type = INPUT_POST;
-                $request = new Map(array_keys($_POST));
+                $request = map(array_keys($_POST));
                 break;
             case "get":
             default:
                 $input_type = INPUT_GET;
-                $request = new Map(array_keys($_GET));
+                $request = map(array_keys($_GET));
                 break;
         }
 
-        $inputs = new Map();
+        $inputs = map();
 
         $request->each(function ($item) use ($input_type, $inputs) {
             $inputs->add(new Pair($item, trim(filter_input($input_type, $item, FILTER_SANITIZE_SPECIAL_CHARS))));
@@ -61,7 +60,13 @@ class Request
         $validator = new Validator;
 
         $validator->addValidator('unique', new UniqueRule());
+        $validator->addValidator('exists_in_table', new ExistsInTableRule());
 
         return $validator->validate($this->all()->toArray(), $rules);
+    }
+
+    public function get($key, $instead = null)
+    {
+        return $this->all()->get($key) ?? $instead;
     }
 }

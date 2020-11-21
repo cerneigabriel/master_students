@@ -1,6 +1,6 @@
 <?php
 
-define("BASE_PATH", realpath(dirname(__FILE__)) . "/");
+define("BASE_PATH", __DIR__ . "/");
 define("APP_PATH", BASE_PATH . "app/");
 define("VENDOR_PATH", BASE_PATH . "vendor/");
 define("ROUTES_PATH", BASE_PATH . "routes/");
@@ -13,22 +13,9 @@ define("MIGRATIONS_PATH", BASE_PATH . "database/migrations/");
 
 require_once VENDOR_PATH . "autoload.php";
 
-var_dump([
-    BASE_PATH,
-    APP_PATH,
-    VENDOR_PATH,
-    ROUTES_PATH,
-    VIEWS_PATH,
-    LAYOUTS_PATH,
-    CONFIG_PATH,
-    DATABASE_PATH,
-    MIGRATIONS_PATH,
-    (new ReflectionClass(\MasterStudents\Core\Application::class))->getFileName()
-]);
+use MasterStudents\Core\Application;
 
-// use MasterStudents\Core\Application;
+$app = new Application(BASE_PATH, $run_migrations ?? false);
 
-// $app = new Application(BASE_PATH, $run_migrations ?? false);
-
-// if (!isset($run_migrations))
-//     $app->run();
+if (!isset($run_migrations))
+    $app->run();

@@ -54,7 +54,7 @@ class AuthController extends Controller
     {
         $validator = $request->validate(User::registrationRules());
 
-        if ($validator->fails()) return $this->handleErrorWithView($validator, $request, "auth.register");
+        if ($validator->fails()) return $this->handleErrorWithView($validator, $request, "frontend.auth.register");
 
         User::create([
             "username" => $request->get("username"),

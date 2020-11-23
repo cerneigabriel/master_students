@@ -8,7 +8,7 @@ use MasterStudents\Models\User;
 
 class SuperAdminMiddleware
 {
-    public function handle(Request $request, $params)
+    public function handle(Request $request)
     {
         if ($this->isSuperAdmin(Auth::user()))
             return true;

@@ -10,7 +10,7 @@ use MasterStudents\Core\Session;
                     <h1>Register</h1>
                     <hr>
                     <form action="<?php echo url("auth.register") ?>" method="POST">
-                        <input type="hidden" name="_token" value="<?php echo Session::get("_token") ?>">
+                        <?php echo csrf_input() ?>
 
                         <div class="form-row">
                             <div class="form-group col-md-6">

@@ -1,8 +1,10 @@
 <?php
 
 use Collections\Map;
+use Collections\Vector;
 use MasterStudents\Core\Application;
 use MasterStudents\Core\Config;
+use MasterStudents\Core\Session;
 
 function app()
 {
@@ -58,12 +60,18 @@ function baseUrl()
     return "$protocol$host";
 }
 
-function url(string $details)
+function url(string $details, array $params = array())
 {
     $route = app()->router->find($details);
     if (is_null($route)) $route = app()->router->find(null, null, $details);
+    $path = $route->path;
 
-    return baseUrl() . $route->path;
+    if (count($route->parameters) > 0) {
+        if (count($route->parameters) !== count($params)) url("error", ["code" => 417]);
+        foreach ($params as $key => $value) $path = str_replace("{{$key}}", "$value", $path);
+    }
+
+    return baseUrl() . $path;
 }
 
 function assets(string $path)
@@ -85,4 +93,19 @@ function request()
 function map($items = [])
 {
     return new Map($items);
+}
+
+function vector($items = [])
+{
+    return new Vector($items);
+}
+
+function csrf_meta()
+{
+    return "<meta name=\"_token\" content=\"" . Session::get("_token") . "\">";
+}
+
+function csrf_input()
+{
+    return "<input type=\"hidden\" name=\"_token\" value=\"" . Session::get("_token") . "\">";
 }

@@ -5,6 +5,8 @@ namespace MasterStudents\Core;
 use MasterStudents\Core\Traits\DatabaseManagerTrait;
 use Carbon\Carbon;
 use Collections\Map;
+use ReflectionMethod;
+use RuntimeException;
 
 abstract class Model
 {
@@ -12,6 +14,7 @@ abstract class Model
 
     protected $repository;
     protected $insert;
+    protected $result;
 
     public function __construct()
     {
@@ -44,6 +47,8 @@ abstract class Model
 
     private function create(array $data)
     {
+        $data = array_filter($data, fn ($value, $key) => in_array($key, $this->fillable), ARRAY_FILTER_USE_BOTH);
+
         if ($this->timestamps && !$this->hasTimestamps($data))
             $data = $this->setTimestamps($data, Carbon::now());
 
@@ -57,15 +62,24 @@ abstract class Model
 
     private function update(array $data)
     {
+        $data = array_filter($data, fn ($value, $key) => in_array($key, $this->fillable), ARRAY_FILTER_USE_BOTH);
+
         if ($this->timestamps && !$this->hasTimestamps($data))
             $data = $this->setUpdatedAt($data, Carbon::now());
 
-        $this->repository->update($data)->where($this->primaryKey, $this->id)->run();
-        $result = $this->repository->where($this->primaryKey, $this->id)->fetchAll();
+        $this->repository->update($data)->where($this->primaryKey, $this->{$this->primaryKey})->run();
+        $result = $this->repository->where($this->primaryKey, $this->{$this->primaryKey})->fetchAll();
 
         if (!empty($result)) return $this->convert($result[0]);
 
         return $this;
+    }
+
+    private function delete()
+    {
+        $this->repository->delete()->where($this->primaryKey, $this->{$this->primaryKey})->run();
+
+        return true;
     }
 
     private function find($id)
@@ -74,7 +88,7 @@ abstract class Model
 
         if (!empty($result)) return $this->convert($result[0]);
 
-        return $this;
+        return null;
     }
 
     private function query(callable $fn)
@@ -91,7 +105,24 @@ abstract class Model
 
     private function get()
     {
-        return $this->convertAll($this->result);
+        return $this->convertArray($this->result);
+    }
+
+    private function all()
+    {
+        return $this->query(fn ($q) => $q)->get();
+    }
+
+    private function withRelations(array $relations)
+    {
+        foreach ($relations as $relation) {
+            if (method_exists($this, $relation)) {
+                $reflection = new ReflectionMethod($this, $relation);
+                $this->{$relation} = $reflection->isStatic() ? $this::{$relation}() : $this->{$relation}();
+            }
+        }
+
+        return $this;
     }
 
     private function convert(array $instance)
@@ -138,5 +169,20 @@ abstract class Model
     {
         $data["updated_at"] = $timestamp->toDateTimeString();
         return $data;
+    }
+
+    public function toArray(): array
+    {
+        $array = array(
+            $this->primaryKey => $this->{$this->primaryKey}
+        );
+
+        $available_fields = array_merge($this->fillable, isset($this->relationships) ? $this->relationships : []);
+
+        foreach ($available_fields as $field)
+            if (isset($this->{$field}))
+                $array[$field] = $this->{$field};
+
+        return $array;
     }
 }

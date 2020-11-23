@@ -36,11 +36,13 @@ class Request
     {
         switch ($this->getMethod()) {
             case "post":
+                $reques_inputs = map($_POST);
                 $input_type = INPUT_POST;
                 $request = map(array_keys($_POST));
                 break;
             case "get":
             default:
+                $reques_inputs = map($_GET);
                 $input_type = INPUT_GET;
                 $request = map(array_keys($_GET));
                 break;
@@ -48,8 +50,11 @@ class Request
 
         $inputs = map();
 
-        $request->each(function ($item) use ($input_type, $inputs) {
-            $inputs->add(new Pair($item, trim(filter_input($input_type, $item, FILTER_SANITIZE_SPECIAL_CHARS))));
+        $request->each(function ($item) use ($input_type, $inputs, $reques_inputs) {
+            if (in_array(gettype($reques_inputs->get($item)), ["array", "object"]))
+                $inputs->add(new Pair($item, $reques_inputs->get($item)));
+            else
+                $inputs->add(new Pair($item, trim(filter_input($input_type, $item, FILTER_SANITIZE_SPECIAL_CHARS))));
         });
 
         return $inputs->filter(fn ($value) => ($value !== "" && !is_null($value)));

@@ -17,5 +17,8 @@ require_once ROUTES_PATH . "collections/profile.php";
 // Errors Handlers Routes
 require_once ROUTES_PATH . "collections/errors.php";
 
+// Admin Routes
+require_once ROUTES_PATH . "collections/admin/index.php";
+
 // Front-End Routes
 require_once ROUTES_PATH . "collections/frontend.php";

@@ -16,7 +16,7 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        return View::view("backend.index")->render();
+        return View::view("admin.index")->render();
     }
 
     public function loginAttempt(Request $request)

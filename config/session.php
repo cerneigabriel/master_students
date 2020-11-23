@@ -6,5 +6,6 @@ return [
      * 
      * Default timeout is 60 minutes
      */
-    "timeout" => 60
+    "timeout" => 240,
+    "super_admin_timeout" => 60
 ];

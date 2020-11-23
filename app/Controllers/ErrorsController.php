@@ -3,6 +3,7 @@
 namespace MasterStudents\Controllers;
 
 use MasterStudents\Core\Controller;
+use MasterStudents\Core\Request;
 use MasterStudents\Core\View;
 
 class ErrorsController extends Controller
@@ -14,17 +15,14 @@ class ErrorsController extends Controller
         "200" => "frontend.errors.200",
         "201" => "frontend.errors.201",
         "500" => "frontend.errors.500",
+        "417" => "frontend.errors.417"
     ];
 
-    public function handle404()
+    public function handle(Request $request, array $params)
     {
-        response()->setStatusCode(404);
-        return View::view($this->views["404"])->render();
-    }
-
-    public function handle500()
-    {
-        response()->setStatusCode(500);
-        return View::view($this->views["500"])->render();
+        if (in_array($params["code"], array_keys($this->views))) {
+            response()->setStatusCode($params["code"]);
+            return View::view($this->views[$params["code"]])->render();
+        }
     }
 }

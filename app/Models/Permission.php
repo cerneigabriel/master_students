@@ -3,9 +3,12 @@
 namespace MasterStudents\Models;
 
 use MasterStudents\Core\Model;
+use MasterStudents\Actions\PermissionActions;
 
 class Permission extends Model
 {
+    use PermissionActions;
+
     public $table = "permissions";
     public $primaryKey = "id";
 
@@ -14,6 +17,10 @@ class Permission extends Model
     public $fillable = [
         "key",
         "name",
+    ];
+
+    public $relationships = [
+        "roles"
     ];
 
     public $casts = [
@@ -25,7 +32,7 @@ class Permission extends Model
     public static function rules()
     {
         return [
-            "key" => ["required", "max:50"],
+            "key" => ["required", "max:50", "unique:roles,key"],
             "name" => ["required", "max:100"]
         ];
     }
@@ -33,16 +40,23 @@ class Permission extends Model
     public static function registrationRules()
     {
         return [
-            "key" => ["required", "max:50", "unique:roles,key"],
+            "key" => self::rules()["key"],
+            "name" => self::rules()["name"]
+        ];
+    }
+
+    public static function updateRules()
+    {
+        return [
             "name" => self::rules()["name"]
         ];
     }
 
     public function roles()
     {
-        return $this->query(function ($query) {
+        return Role::query(function ($query) {
             return $query
-                ->table("roles")
+                ->select("roles.*")
                 ->innerJoin('role_permission')
                 ->on(['roles.id' => 'role_permission.role_id'])
                 ->onWhere('role_permission.permission_id', $this->id);

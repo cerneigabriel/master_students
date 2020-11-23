@@ -13,6 +13,7 @@ class Route
     public $path = null;
     public $callback = null;
     public $middlewares = [];
+    public $parameters = [];
 
     public function __construct(string $path, array $details, string $method)
     {
@@ -31,7 +32,7 @@ class Route
 
     private function setController($controller)
     {
-        if (is_string($controller) && !!strpos($controller, "::") && count(explode("::", $controller)) === 2) {
+        if (is_string($controller) && str_contains($controller, "::") && count(explode("::", $controller)) === 2) {
             $this->controller = "\\MasterStudents\\Controllers\\" . explode("::", $controller)[0];
             $this->controller = new $this->controller;
             $this->controller_method = explode("::", $controller)[1];
@@ -52,10 +53,12 @@ class Route
     {
         if ($path[0] !== "/") $path = "/$path";
         if (count(str_split($path)) < 1) throw new Exception("Invalid path");
+
+        $this->parameters = map(explode("/", $path))
+            ->filter(fn ($v) => $v != "" && str_contains($v, "{") && str_contains($v, "}"))
+            ->toArray();
+
         $this->path = $path;
-        // if (!!strpos($path, "{")) {
-        //     var_dump(explode("{", $path));
-        // }
 
         return $this;
     }
@@ -83,5 +86,15 @@ class Route
     public function url()
     {
         return url($this->name);
+    }
+
+    public function getExplodedRoutePathWithParams()
+    {
+        return map(explode("/", $this->path))->filter(fn ($v) => $v != "");
+    }
+
+    public function getExplodedRoutePathWithoutParams()
+    {
+        return $this->getExplodedRoutePathWithParams()->filter(fn ($v) => $v != "" && !in_array($v, $this->parameters));
     }
 }

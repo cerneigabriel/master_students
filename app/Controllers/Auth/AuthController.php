@@ -12,7 +12,6 @@ use MasterStudents\Models\User;
 use MasterStudents\Core\Request;
 use MasterStudents\Core\Controller;
 use MasterStudents\Core\Session;
-use MasterStudents\Core\Traits\DatabaseManagerTrait;
 
 class AuthController extends Controller
 {
@@ -27,7 +26,7 @@ class AuthController extends Controller
     {
         $validator = $request->validate(User::loginRules());
 
-        if ($validator->fails()) return $this->handleErrorWithView($validator, $request, "frontend.auth.login");
+        if ($validator->fails()) return response()->handleErrorWithView($validator, $request, "frontend.auth.login");
 
         $remember_me = filter_var($request->get("remember_me", false), FILTER_VALIDATE_BOOLEAN);
 
@@ -54,7 +53,7 @@ class AuthController extends Controller
     {
         $validator = $request->validate(User::registrationRules());
 
-        if ($validator->fails()) return $this->handleErrorWithView($validator, $request, "frontend.auth.register");
+        if ($validator->fails()) return response()->handleErrorWithView($validator, $request, "frontend.auth.register");
 
         User::create([
             "username" => $request->get("username"),
@@ -75,7 +74,9 @@ class AuthController extends Controller
             return response()->redirect(url("auth.login"));
         }
 
-        return response()->redirect(url("error.500"));
+        return response()->redirect(url("error", [
+            "code" => 404
+        ]));
     }
 
     public function checkUsername(Request $request)
@@ -84,7 +85,7 @@ class AuthController extends Controller
 
         $validator = $request->validate($usernameRule);
 
-        if ($validator->fails()) return $this->handleErrorWithJSON($validator, 401);
+        if ($validator->fails()) return response()->handleErrorWithJSON($validator, 401);
 
         return response()->json([
             "status" => 200,

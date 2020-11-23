@@ -41,9 +41,9 @@ function server($key = null)
     return is_null($key) ? $_SERVER : (isset($_SERVER[$key]) ? $_SERVER[$key] : false);
 }
 
-function env($prop)
+function env($prop = null)
 {
-    return $_ENV[$prop] ?? getenv($prop) ?? false;
+    return !is_null($prop) ? ($_ENV[$prop] ?? getenv($prop) ?? false) : ($_ENV ?? getenv() ?? false);
 }
 
 function config($prop)

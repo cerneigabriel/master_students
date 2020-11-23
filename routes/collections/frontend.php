@@ -19,3 +19,10 @@ router()->get("/server", array(
     },
     "name" => "server"
 ));
+
+router()->get("/env", array(
+    "controller" => function (Request $request) {
+        var_dump(env());
+    },
+    "name" => "server"
+));

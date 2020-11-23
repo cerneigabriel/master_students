@@ -2,14 +2,13 @@
 
 namespace MasterStudents\Middlewares;
 
-use Closure;
 use MasterStudents\Core\Auth;
 use MasterStudents\Core\Request;
 use MasterStudents\Models\User;
 
 class SuperAdminMiddleware
 {
-    public function handle(Request $request)
+    public function handle(Request $request, $params)
     {
         if ($this->isSuperAdmin(Auth::user()))
             return true;

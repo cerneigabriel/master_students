@@ -126,7 +126,7 @@ class RolesController extends Controller
             $role->attachPermission($permission);
         }
 
-        Session::set("success", "Roles were attached to $role->name successfully");
+        Session::set("success", "Permissions were attached to $role->name successfully");
 
         return response()->redirect(url("admin.roles.edit", ["id" => $role->id]));
     }

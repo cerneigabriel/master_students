@@ -43,7 +43,7 @@ function server($key = null)
 
 function env($prop)
 {
-    return $_ENV[$prop] ?? false;
+    return $_ENV[$prop] ?? getenv($prop) ?? false;
 }
 
 function config($prop)

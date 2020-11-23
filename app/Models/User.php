@@ -165,6 +165,11 @@ class User extends Model
         return in_array($role->id, map($this->roles())->map(fn ($v) => $v->id)->toArray());
     }
 
+    public function hasRoleKey(string $key)
+    {
+        return in_array($key, map($this->roles())->map(fn ($v) => $v->key)->toArray());
+    }
+
     public function detachAllRoles()
     {
         $this->db

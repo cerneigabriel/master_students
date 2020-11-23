@@ -37,7 +37,6 @@ class Application
             $this->hash = new Hash();
             $this->auth = new Auth();
 
-
             $this->initiateWebRoutes();
         }
 

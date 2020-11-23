@@ -16,6 +16,6 @@ class CSRFMiddleware
         if ($request->get("_token") === Session::get("_token"))
             return true;
 
-        return false;
+        return response()->redirect(url("home"));
     }
 }

@@ -6,10 +6,12 @@ use Carbon\Carbon;
 use MasterStudents\Core\Model;
 use MasterStudents\Actions\UserActions;
 use Collections\Map;
+use MasterStudents\Actions\SecurityManagement\UserPermissionsManagement;
+use MasterStudents\Actions\SecurityManagement\UserRolesManagement;
 
 class User extends Model
 {
-    use UserActions;
+    use UserRolesManagement, UserPermissionsManagement, UserActions;
 
     public $table = "users";
     public $primaryKey = "id";
@@ -35,7 +37,8 @@ class User extends Model
     public $relationships = [
         "roles",
         "sessions",
-        "permissions"
+        "permissions",
+        "all_permissions"
     ];
 
     public $casts = [
@@ -103,6 +106,15 @@ class User extends Model
         ]), ARRAY_FILTER_USE_BOTH);
     }
 
+    public static function changePasswordRules(User $user)
+    {
+        return [
+            "old_password" => ["required", "min:6", "max:255", "password_match:users,password,{$user->primaryKey},{$user->{$user->primaryKey}}"],
+            "password" => ["required", "min:6", "max:255"],
+            "password_confirm" => ["required", "same:password"],
+        ];
+    }
+
     public static function adminUpdateRules()
     {
         return [
@@ -129,27 +141,17 @@ class User extends Model
         ]), ARRAY_FILTER_USE_BOTH);
     }
 
-    public function roles()
-    {
-        return Role::query(function ($query) {
-            return $query
-                ->select("roles.*")
-                ->innerJoin('user_role')
-                ->on(['roles.id' => 'user_role.role_id'])
-                ->onWhere('user_role.user_id', $this->id);
-        })->get();
-    }
-
     public function sessions()
     {
         return UserSession::query(fn ($q) => $q->select("sessions.*")->where('sessions.user_id', $this->id))->get();
     }
 
-    public function permissions()
+    public function all_permissions()
     {
         return Permission::query(function ($query) {
             return $query
                 ->select("permissions.*")
+
                 ->innerJoin('role_permission')
                 ->on(['permissions.id' => 'role_permission.permission_id'])
 
@@ -157,50 +159,19 @@ class User extends Model
                 ->on(['role_permission.role_id' => 'user_role.role_id'])
 
                 ->onWhere('user_role.user_id', $this->id);
-        })->get();
+        })->get() + $this->permissions();
     }
 
-    public function hasRole(Role $role)
+    public function rolesPermissions()
     {
-        return in_array($role->id, map($this->roles())->map(fn ($v) => $v->id)->toArray());
-    }
+        $permissions = vector();
 
-    public function hasRoleKey(string $key)
-    {
-        return in_array($key, map($this->roles())->map(fn ($v) => $v->key)->toArray());
-    }
+        map($this->roles())->each(function ($role) use ($permissions) {
+            // var_dump($role->permissions());
+            $permissions->addAll($role->permissions());
+            // map($role->permissions())->each(fn ($p) => $permissions->add($p));
+        });
 
-    public function detachAllRoles()
-    {
-        $this->db
-            ->table("user_role")
-            ->delete()
-            ->where("user_id", $this->id)
-            ->run();
-    }
-
-    public function detachRole(Role $role)
-    {
-        $this->db
-            ->table("user_role")
-            ->delete()
-            ->where("user_id", $this->id)
-            ->where("role_id", $role->id)
-            ->run();
-    }
-
-    public function attachRole(Role $role)
-    {
-        if (!$this->hasRole($role)) {
-            $this->db
-                ->insert("user_role")
-                ->values([
-                    "user_id" => $this->id,
-                    "role_id" => $role->id,
-                    "created_at" => Carbon::now()->toDateTimeString(),
-                    "updated_at" => Carbon::now()->toDateTimeString(),
-                ])
-                ->run();
-        }
+        return $permissions->toArray();
     }
 }

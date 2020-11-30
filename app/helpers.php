@@ -43,7 +43,7 @@ function server($key = null)
 
 function env($prop = null)
 {
-    return !is_null($prop) ? ($_ENV[$prop] ?? getenv($prop) ?? false) : ($_ENV ?? getenv() ?? false);
+    return $_ENV[$prop] ?? false;
 }
 
 function config($prop)
@@ -62,14 +62,18 @@ function baseUrl()
 
 function url(string $details, array $params = array())
 {
-    $route = app()->router->find($details);
-    if (is_null($route)) $route = app()->router->find(null, null, $details);
-    $path = $route->path;
+    $route = router()->find($details);
+    if (is_null($route)) $route = router()->find(null, null, $details);
 
-    if (count($route->parameters) > 0) {
-        if (count($route->parameters) !== count($params)) url("error", ["code" => 417]);
-        foreach ($params as $key => $value) $path = str_replace("{{$key}}", "$value", $path);
-    }
+    if (!is_null($route)) {
+        $path = $route->path;
+
+        if (count($route->parameters) > 0) {
+            if (count($route->parameters) !== count($params)) url("error", ["code" => 417]);
+            foreach ($params as $key => $value) $path = str_replace("{{$key}}", "$value", $path);
+        }
+    } else $path = "";
+
 
     return baseUrl() . $path;
 }

@@ -3,11 +3,11 @@
 namespace MasterStudents\Core;
 
 use MasterStudents\Core\Traits\DatabaseManagerTrait;
-use Rakit\Validation\Validation;
 
 abstract class Controller
 {
     use DatabaseManagerTrait;
+    use ControllerHandler;
 
     public function __construct()
     {

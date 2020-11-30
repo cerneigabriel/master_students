@@ -2,6 +2,7 @@
 
 use MasterStudents\Core\Migration;
 use Spiral\Database\ForeignKeyInterface;
+use Spiral\Database\Injection\Fragment;
 
 class m0004_create_user_role_table extends Migration
 {
@@ -15,8 +16,8 @@ class m0004_create_user_role_table extends Migration
             $schema->integer("user_id")->nullable(false);
             $schema->integer("role_id")->nullable(false);
 
-            $schema->timestamp("created_at")->nullable(false);
-            $schema->timestamp("updated_at")->nullable(false);
+            $schema->timestamp("created_at")->nullable(false)->defaultValue(new Fragment("CURRENT_TIMESTAMP"));
+            $schema->timestamp("updated_at")->nullable(false)->defaultValue(new Fragment("CURRENT_TIMESTAMP"));
 
             return $schema;
         }

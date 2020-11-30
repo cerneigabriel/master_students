@@ -15,13 +15,41 @@ use MasterStudents\Core\Session;
 
 class AuthController extends Controller
 {
+    /**
+     * Specify table name for repository initializer
+     *
+     * @var string
+     */
     protected $table = "users";
 
+    /**
+     * Login Page
+     *
+     * @param Request $request
+     * @return void
+     */
     public function login(Request $request)
     {
         return View::view("frontend.auth.login")->render();
     }
 
+    /**
+     * Register Page
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function register(Request $request)
+    {
+        return View::view("frontend.auth.register")->render();
+    }
+
+    /**
+     * Login Attempt Method
+     *
+     * @param Request $request
+     * @return void
+     */
     public function loginAttempt(Request $request)
     {
         $validator = $request->validate(User::loginRules());
@@ -44,28 +72,30 @@ class AuthController extends Controller
         ])->render();
     }
 
-    public function register(Request $request)
-    {
-        return View::view("frontend.auth.register")->render();
-    }
-
+    /**
+     * Register Attempt Method
+     *
+     * @param Request $request
+     * @return void
+     */
     public function registerAttempt(Request $request)
     {
-        $validator = $request->validate(User::registrationRules());
+        $user = User::createAction($request->all()->toArray());
 
-        if ($validator->fails()) return response()->handleErrorWithView($validator, $request, "frontend.auth.register");
+        if ($user->server_error) return response()->redirect(url("error", ["code" => 500]));
+        if (!$user->created) return response()->handleErrorWithView($user->validator, $request, "frontend.auth.register");
 
-        User::create([
-            "username" => $request->get("username"),
-            "first_name" => $request->get("first_name"),
-            "last_name" => $request->get("last_name"),
-            "email" => $request->get("email"),
-            "password" => Hash::make($request->get("password")),
-        ]);
+        Session::set("success", "You have successfully registered");
 
         return response()->redirect(url("auth.login"));
     }
 
+    /**
+     * Logout Attempt Method
+     *
+     * @param Request $request
+     * @return void
+     */
     public function logoutAttempt(Request $request)
     {
         if (Auth::logoutAttempt()) {
@@ -79,6 +109,12 @@ class AuthController extends Controller
         ]));
     }
 
+    /**
+     * Check Username for correctness
+     *
+     * @param Request $request
+     * @return void
+     */
     public function checkUsername(Request $request)
     {
         $usernameRule = [map(User::rules())->get("username")];

@@ -1,19 +1,20 @@
 <?php
 
 use MasterStudents\Core\Session;
+use MasterStudents\Models\Group;
 
 ?>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-gray-800">Create Permission</h1>
+  <h1 class="h3 mb-0 text-gray-800">Create Group</h1>
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="<?php echo url("admin.index"); ?>">Admin</a></li>
-    <li class="breadcrumb-item"><a href="<?php echo url("admin.permissions.index"); ?>">Permissions</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo url("admin.groups.index"); ?>">Groups</a></li>
     <li class="breadcrumb-item active" aria-current="page">Create</li>
   </ol>
 </div>
 
 <!-- Row -->
-<form class="row align-items-stretch" action="<?php echo url("admin.permissions.store") ?>" method="POST">
+<form class="row align-items-stretch" action="<?php echo url("admin.groups.store") ?>" method="POST">
   <?php echo csrf_input() ?>
 
   <!-- Basic information -->
@@ -24,14 +25,30 @@ use MasterStudents\Core\Session;
       </div>
       <div class="card-body">
         <div class="form-group">
-          <label for="key">Key</label>
-          <input type="text" name="key" class="form-control <?php echo isset($errors) && !is_null($errors->first("key")) ? "is-invalid" : ""; ?>" id="key" value="<?php echo isset($model) ? $model->get("key") : ""; ?>" aria-describedby="key_error">
-          <div id="key_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("key") : ""; ?></div>
+          <label class="form-label" for="user_input">Choose Leader</label>
+          <select class="form-control <?php echo isset($errors) && !is_null($errors->first("user_id")) ? "is-invalid" : ""; ?>" name="user_id" id="user_input" aria-describedby="user_id_error">
+            <?php foreach ($users as $user) : ?>
+              <option value="<?php echo $user->id ?>"><?php echo "$user->first_name $user->last_name" ?></option>
+            <?php endforeach; ?>
+          </select>
+          <div id="user_id_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("user_id") : ""; ?></div>
         </div>
+
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" name="name" class="form-control <?php echo isset($errors) && !is_null($errors->first("name")) ? "is-invalid" : ""; ?>" id="name" value="<?php echo isset($model) ? $model->get("name") : ""; ?>" aria-describedby="name_error">
           <div id="name_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("name") : ""; ?></div>
+        </div>
+
+        <div class="form-group" id="year_input">
+          <label for="year">Year</label>
+          <div class="input-group date">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+            </div>
+            <input type="text" name="year" class="form-control <?php echo isset($errors) && !is_null($errors->first("year")) ? "is-invalid" : ""; ?>" id="year" value="<?php echo isset($model) ? $model->get("year") : ""; ?>" aria-describedby="year_error">
+            <div id="year_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("year") : ""; ?></div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -64,15 +81,23 @@ use MasterStudents\Core\Session;
 </div>
 
 <script>
-  var editedName = false;
-
-  $(document).on("keyup", "#key", function() {
-    if (!editedName) {
-      var name = $(this).val().split("_").join(" ").toLowerCase().replace(/\b./g, a => a.toUpperCase());
-
-      $("#name").val(name);
-    }
+  $(document).ready(function() {
+    $('#user_input').select2();
+    $('#year_input .input-group.date').datepicker({
+      endDate: (new Date()).getFullYear().toString(),
+      minViewMode: "years",
+      maxViewMode: "years",
+      startView: "years",
+      format: 'yyyy',
+      autoclose: true,
+      todayHighlight: true,
+      todayBtn: 'linked',
+    });
   });
-
-  $(document).on("keyup", "#name", () => editedName = true);
 </script>
+
+<style>
+  .select2 {
+    display: block;
+  }
+</style>

@@ -2,6 +2,7 @@
 
 use MasterStudents\Core\Migration;
 use Spiral\Database\ForeignKeyInterface;
+use Spiral\Database\Injection\Fragment;
 
 class m0003_create_sessions_table extends Migration
 {
@@ -19,8 +20,8 @@ class m0003_create_sessions_table extends Migration
             $schema->json("data")->nullable(true);
             $schema->string("ip")->nullable(false);
 
-            $schema->timestamp("created_at")->nullable(false);
-            $schema->timestamp("updated_at")->nullable(false);
+            $schema->timestamp("created_at")->nullable(false)->defaultValue(new Fragment("CURRENT_TIMESTAMP"));
+            $schema->timestamp("updated_at")->nullable(false)->defaultValue(new Fragment("CURRENT_TIMESTAMP"));
 
             $schema->index(["token"])->unique(true);
 

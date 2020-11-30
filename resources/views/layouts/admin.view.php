@@ -14,9 +14,12 @@ use MasterStudents\Core\Session;
     <link href="<?php echo assets("favicon.ico") ?>" rel="icon">
 
     <!-- Links -->
-    <link href="<?php echo assets("assets/vendor/admin/fontawesome-free/css/all.min.css") ?>" rel="stylesheet" type="text/css">
-    <link href="<?php echo assets("assets/vendor/admin/bootstrap/css/bootstrap.min.css") ?>" rel="stylesheet" type="text/css">
+    <link href="<?php echo assets("assets/vendor/admin/fontawesome-free/css/all.min.css") ?>" rel="stylesheet">
+    <link href="<?php echo assets("assets/vendor/admin/bootstrap/css/bootstrap.min.css") ?>" rel="stylesheet">
     <link href="<?php echo assets("assets/vendor/admin/select2/dist/css/select2.min.css") ?>" rel="stylesheet">
+    <link href="<?php echo assets("assets/vendor/admin/bootstrap-datepicker/css/bootstrap-datepicker.min.css") ?>" rel="stylesheet">
+    <link href="<?php echo assets("assets/vendor/admin/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css") ?>" rel="stylesheet">
+    <link href="<?php echo assets("assets/vendor/admin/clock-picker/clockpicker.css") ?>" rel="stylesheet">
     <link href="<?php echo assets("assets/css/admin/ruang-admin.min.css") ?>" rel="stylesheet">
 
     <!-- Scripts -->
@@ -25,6 +28,9 @@ use MasterStudents\Core\Session;
     <script src="<?php echo assets("assets/vendor/admin/jquery-easing/jquery.easing.min.js") ?>"></script>
     <script src="<?php echo assets("assets/vendor/admin/select2/dist/js/select2.min.js") ?>"></script>
     <script src="<?php echo assets("assets/vendor/admin/chart.js/Chart.min.js") ?>"></script>
+    <script src="<?php echo assets("assets/vendor/admin/bootstrap-datepicker/js/bootstrap-datepicker.min.js") ?>"></script>
+    <script src="<?php echo assets("assets/vendor/admin/bootstrap-touchspin/js/jquery.bootstrap-touchspin.js") ?>"></script>
+    <script src="<?php echo assets("assets/vendor/admin/clock-picker/clockpicker.js") ?>"></script>
 </head>
 
 <body id="page-top">
@@ -57,57 +63,69 @@ use MasterStudents\Core\Session;
                 </div>
                 <div class="sidebar-brand-text text-left mx-3"><?php echo config("app.app_name") ?></div>
             </a>
+
             <hr class="sidebar-divider my-0">
-            <li class="nav-item <?php echo router()->current_route->name == "admin.index" ? "active" : ""; ?>">
-                <a class="nav-link" href="<?php echo url("admin.index"); ?>">
-                    <i class="fas fa-fw fa-chart-line"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
+
+            <?php if (Auth::user()->can("view_admin_dashboard")) : ?>
+                <li class="nav-item <?php echo router()->current_route->name == "admin.index" ? "active" : ""; ?>">
+                    <a class="nav-link" href="<?php echo url("admin.index"); ?>">
+                        <i class="fas fa-fw fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+
             <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Security
-            </div>
-            <li class="nav-item <?php echo router()->current_route->name == "admin.users.index" ? "active" : ""; ?>">
-                <a class="nav-link" href="<?php echo url("admin.users.index"); ?>">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Users</span>
-                </a>
-            </li>
-            <li class="nav-item <?php echo router()->current_route->name == "admin.roles.index" ? "active" : ""; ?>">
-                <a class="nav-link" href="<?php echo url("admin.roles.index"); ?>">
-                    <i class="fas fa-fw fa-user-tag"></i>
-                    <span>
-                        Roles
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item <?php echo router()->current_route->name == "admin.permissions.index" ? "active" : ""; ?>">
-                <a class="nav-link" href="<?php echo url("admin.permissions.index"); ?>">
-                    <i class="fas fa-fw fa-clipboard-check"></i>
-                    <span>
-                        Permissions
-                    </span>
-                </a>
-            </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap" aria-expanded="true" aria-controls="collapseBootstrap">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Roles</span>
-                </a>
-                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Bootstrap UI</h6>
-                        <a class="collapse-item" href="alerts.html">Alerts</a>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                        <a class="collapse-item" href="modals.html">Modals</a>
-                        <a class="collapse-item" href="popovers.html">Popovers</a>
-                        <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
-                    </div>
+
+            <?php if (Auth::user()->can("view_admin_security")) : ?>
+                <div class="sidebar-heading">
+                    Security
                 </div>
-            </li> -->
+
+                <li class="nav-item <?php echo router()->current_route->name == "admin.users.index" ? "active" : ""; ?>">
+                    <a class="nav-link" href="<?php echo url("admin.users.index"); ?>">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+                <li class="nav-item <?php echo router()->current_route->name == "admin.roles.index" ? "active" : ""; ?>">
+                    <a class="nav-link" href="<?php echo url("admin.roles.index"); ?>">
+                        <i class="fas fa-fw fa-user-tag"></i>
+                        <span>
+                            Roles
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item <?php echo router()->current_route->name == "admin.permissions.index" ? "active" : ""; ?>">
+                    <a class="nav-link" href="<?php echo url("admin.permissions.index"); ?>">
+                        <i class="fas fa-fw fa-clipboard-check"></i>
+                        <span>
+                            Permissions
+                        </span>
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <hr class="sidebar-divider">
+
+            <?php if (Auth::user()->can("view_admin_students_repartisation")) : ?>
+                <div class="sidebar-heading">
+                    Students Repartisation
+                </div>
+
+                <?php if (Auth::user()->can("view_admin_groups")) : ?>
+                    <li class="nav-item <?php echo router()->current_route->name == "admin.groups.index" ? "active" : ""; ?>">
+                        <a class="nav-link" href="<?php echo url("admin.groups.index"); ?>">
+                            <i class="fas fa-fw fa-layer-group"></i>
+                            <span>
+                                Groups
+                            </span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+            <?php endif; ?>
         </ul>
+
         <!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
@@ -314,7 +332,7 @@ use MasterStudents\Core\Session;
 
 
     <script src="<?php echo assets("assets/js/admin/demo/chart-area-demo.js") ?>"></script>
-    <script src="<?php echo assets("assets/js/admin/ruang-admin.min.js") ?>"></script>
+    <script src="<?php echo assets("assets/js/admin/ruang-admin.js") ?>"></script>
 </body>
 
 </html>

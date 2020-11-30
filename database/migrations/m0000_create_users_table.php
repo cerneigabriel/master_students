@@ -1,6 +1,7 @@
 <?php
 
 use MasterStudents\Core\Migration;
+use Spiral\Database\Injection\Fragment;
 
 class m0000_create_users_table extends Migration
 {
@@ -25,8 +26,8 @@ class m0000_create_users_table extends Migration
             $schema->text("notes");
             $schema->string("zoom_link");
 
-            $schema->timestamp("created_at")->nullable(false);
-            $schema->timestamp("updated_at")->nullable(false);
+            $schema->timestamp("created_at")->nullable(false)->defaultValue(new Fragment("CURRENT_TIMESTAMP"));
+            $schema->timestamp("updated_at")->nullable(false)->defaultValue(new Fragment("CURRENT_TIMESTAMP"));
 
             $schema->index(["username", "email"])->unique(true);
 

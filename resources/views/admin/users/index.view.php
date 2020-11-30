@@ -53,10 +53,10 @@
                 <td><?php echo "$user->first_name $user->last_name" ?></td>
                 <td><?php echo $user->email ?></td>
                 <td><?php echo $user->phone ?></td>
-                <td><?php echo $user->gender ?></td>
+                <td><?php echo $user->gender === "m" ? "Male" : "Female" ?></td>
                 <td><?php echo $user->zoom_link ?></td>
                 <td>
-                  <form action="<?php echo url("admin.users.delete", ["id" => $user->id]) ?>" style="display: inline">
+                  <form action="<?php echo url("admin.users.delete", ["id" => $user->id]) ?>" method="POST" style="display: inline">
                     <?php echo csrf_input() ?>
                     <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-fw fa-trash-alt"></i></button>
                   </form>
@@ -71,15 +71,6 @@
   </div>
 </div>
 <!--Row-->
-
-<!-- Documentation Link -->
-<div class="row">
-  <div class="col-lg-12">
-    <p>DataTables is a third party plugin that is used to generate the demo table below. For more information
-      about DataTables, please visit the official <a href="https://datatables.net/" target="_blank">DataTables
-        documentation.</a></p>
-  </div>
-</div>
 
 <!-- Modal Logout -->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">

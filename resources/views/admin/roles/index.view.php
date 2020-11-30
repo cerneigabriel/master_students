@@ -53,7 +53,7 @@
                 <td><?php echo $role->created_at ?></td>
                 <td><?php echo $role->updated_at ?></td>
                 <td>
-                  <form action="<?php echo url("admin.roles.delete", ["id" => $role->id]) ?>" style="display: inline">
+                  <form action="<?php echo url("admin.roles.delete", ["id" => $role->id]) ?>" method="POST" style="display: inline">
                     <?php echo csrf_input() ?>
                     <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-fw fa-trash-alt"></i></button>
                   </form>

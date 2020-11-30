@@ -21,6 +21,8 @@
         "ikkez/f3-schema-builder": "dev-master",
         "spiral/database": "^2.7",
         "nesbot/carbon": "^2.41",
-        "rakit/session": "^1.0"
+        "rakit/session": "^1.0",
+        "guzzlehttp/guzzle": "^7.2",
+        "phpmailer/phpmailer": "^6.1"
     }
 }

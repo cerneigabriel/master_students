@@ -1,66 +1,51 @@
 <?php
 
+
 /**
  * Admin Users Routes
  */
-router()->get("/admin/users", [
-  "controller" => "Admin\UsersController::index",
-  "name" => "admin.users.index",
-  "middlewares" => $middlewares
-]);
+router()->get("/admin/users", getAdminRouteDetails("Admin\UsersController::index", "admin.users.index"));
 
-router()->get("/admin/users/create", [
-  "controller" => "Admin\UsersController::create",
-  "name" => "admin.users.create",
-  "middlewares" => $middlewares
-]);
+router()->get("/admin/users/create", getAdminRouteDetails("Admin\UsersController::create", "admin.users.create"));
 
-router()->post("/admin/users", [
-  "controller" => "Admin\UsersController::store",
-  "name" => "admin.users.store",
-  "middlewares" => $middlewares
-]);
+router()->post("/admin/users", getAdminRouteDetails("Admin\UsersController::store", "admin.users.store"));
 
-router()->get("/admin/users/{id}/edit", [
-  "controller" => "Admin\UsersController::edit",
-  "name" => "admin.users.edit",
-  "middlewares" => $middlewares
-]);
+router()->get("/admin/users/{id}/edit", getAdminRouteDetails("Admin\UsersController::edit", "admin.users.edit"));
 
-router()->post("/admin/users/{id}", [
-  "controller" => "Admin\UsersController::update",
-  "name" => "admin.users.update",
-  "middlewares" => $middlewares
-]);
+router()->post("/admin/users/{id}", getAdminRouteDetails("Admin\UsersController::update", "admin.users.update"));
 
-router()->post("/admin/users/{id}/delete", [
-  "controller" => "Admin\UsersController::delete",
-  "name" => "admin.users.delete",
-  "middlewares" => $middlewares
-]);
+router()->post("/admin/users/{id}/delete", getAdminRouteDetails("Admin\UsersController::delete", "admin.users.delete"));
 
-// Detach role or roles
-router()->post("/admin/users/{user_id}/roles/{role_id}/detach", [
-  "controller" => "Admin\UsersController::detachRole",
-  "name" => "admin.users.detach_role",
-  "middlewares" => $middlewares
-]);
+router()->post("/admin/users/{id}/change_password", getAdminRouteDetails("Admin\UsersController::changePassword", "admin.users.change_password"));
 
-router()->post("/admin/users/{user_id}/roles/detach", [
-  "controller" => "Admin\UsersController::detachRoles",
-  "name" => "admin.users.detach_roles",
-  "middlewares" => $middlewares
-]);
 
-// Attach role or roles
-router()->post("/admin/users/{user_id}/roles/{role_id}/attach", [
-  "controller" => "Admin\UsersController::attachRole",
-  "name" => "admin.users.attach_role",
-  "middlewares" => $middlewares
-]);
+/**
+ * User Roles Management Routes
+ */
+router()->post("/admin/users/{user_id}/roles/{role_id}/detach", getAdminRouteDetails("Admin\UsersController::detachRole", "admin.users.detach_role"));
 
-router()->post("/admin/users/{user_id}/roles/attach", [
-  "controller" => "Admin\UsersController::attachRoles",
-  "name" => "admin.users.attach_roles",
-  "middlewares" => $middlewares
-]);
+router()->post("/admin/users/{user_id}/roles/detach", getAdminRouteDetails("Admin\UsersController::detachRoles", "admin.users.detach_roles"));
+
+
+router()->post("/admin/users/{user_id}/roles/{role_id}/attach", getAdminRouteDetails("Admin\UsersController::attachRole", "admin.users.attach_role"));
+
+router()->post("/admin/users/{user_id}/roles/attach", getAdminRouteDetails("Admin\UsersController::attachRoles", "admin.users.attach_roles"));
+
+
+router()->post("/admin/users/{user_id}/roles/update", getAdminRouteDetails("Admin\UsersController::updateRoles", "admin.users.update_roles"));
+
+
+/**
+ * User Permissions Management Routes
+ */
+router()->post("/admin/users/{user_id}/permissions/{permission_id}/detach", getAdminRouteDetails("Admin\UsersController::detachPermission", "admin.users.detach_permission"));
+
+router()->post("/admin/users/{user_id}/permissions/detach", getAdminRouteDetails("Admin\UsersController::detachPermissions", "admin.users.detach_permissions"));
+
+
+router()->post("/admin/users/{user_id}/permissions/{permission_id}/attach", getAdminRouteDetails("Admin\UsersController::attachPermission", "admin.users.attach_permission"));
+
+router()->post("/admin/users/{user_id}/permissions/attach", getAdminRouteDetails("Admin\UsersController::attachPermissions", "admin.users.attach_permissions"));
+
+
+router()->post("/admin/users/{user_id}/permissions/update", getAdminRouteDetails("Admin\UsersController::updatePermissions", "admin.users.update_permissions"));

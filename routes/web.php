@@ -5,6 +5,7 @@
  * Web Routes
  */
 
+
 // Api Routes
 require_once ROUTES_PATH . "collections/api.php";
 

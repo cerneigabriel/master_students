@@ -2,48 +2,29 @@
 
 namespace MasterStudents\Controllers\Admin;
 
-use Collections\Map;
-use MasterStudents\Core\Auth;
-use MasterStudents\Core\Hash;
 use MasterStudents\Core\View;
-use MasterStudents\Models\User;
-
-// Models
 use MasterStudents\Core\Request;
 use MasterStudents\Core\Controller;
 
 class AdminController extends Controller
 {
+    /**
+     * Define default permissions for controller
+     *
+     * @var array
+     */
+    protected $defaultHandlers = ["view_admin_panel"];
+
+    /**
+     * Index page | Dashboard Page
+     *
+     * @param Request $request
+     * @return void
+     */
     public function index(Request $request)
     {
+        $this->runHandler(["view_admin_dashboard"]);
+
         return View::view("admin.index")->render();
-    }
-
-    public function loginAttempt(Request $request)
-    {
-        // $validator = $request->validate(User::loginRules());
-        // $request = $request->all();
-
-        // if ($validator->fails()) {
-        //     return View::view("frontend.auth.login", [
-        //         "errors" => $validator->errors(),
-        //         "model" => $request
-        //     ])->render();
-        // }
-
-        // $user = User::query(fn ($query) => ($query->where("email", $request->get("email"))))->first();
-
-        // if (auth()->attempt($user, $request->get("password"))) {
-        //     session()->set("success", "You are logged in.");
-
-        //     return response()->redirect(url("profile.index"));
-        // }
-
-        // session()->set("error", "Email or password does not match our records.");
-
-        // return View::view("frontend.auth.login", [
-        //     "errors" => $validator->errors(),
-        //     "model" => $request
-        // ])->render();
     }
 }

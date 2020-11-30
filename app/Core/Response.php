@@ -2,6 +2,7 @@
 
 namespace MasterStudents\Core;
 
+use Rakit\Validation\ErrorBag;
 use Rakit\Validation\Validation;
 
 class Response
@@ -32,21 +33,21 @@ class Response
         exit();
     }
 
-    public function handleErrorWithView(Validation $validator, Request $request, string $view, $model = null, array $params = [])
+    public function handleErrorWithView($validator, Request $request, string $view, $model = null, array $params = [])
     {
         $model = !is_null($model) ? map(array_merge($model->toArray(), $request->all()->toArray())) : $request->all();
+
         return View::view($view, [
-            "errors" => $validator->errors(),
-            "model" => $model,
-            ...$params
-        ])->render();
+            "errors" => !is_null($validator) ? $validator->errors() : new ErrorBag(),
+            "model" => $model
+        ] + $params)->render();
     }
 
-    public function handleErrorWithJSON(Validation $validator, int $code)
+    public function handleErrorWithJSON($validator, int $code)
     {
         return $this->json([
             "status" => 401,
-            "errors" => $validator->errors()
+            "errors" => !is_null($validator) ? $validator->errors() : new ErrorBag(),
         ], $code);
     }
 }

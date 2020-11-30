@@ -845,7 +845,7 @@ a:focus {
 
 .sidebar.toggled {
   overflow: visible;
-  width: 6.5rem !important;
+  width: 5.5rem !important;
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   z-index: 1;

@@ -16,7 +16,7 @@ class SessionsCheckerMiddleware
     if (Auth::check()) {
       $user_session = Auth::user_session();
 
-      if (!$user_session->remember_token && Carbon::parse($user_session->created_at)->diffInMinutes(Carbon::now()) > Config::get("session.timeout")) {
+      if (!$user_session->remember_token && Carbon::parse($user_session->updated_at)->diffInMinutes(Carbon::now()) > Config::get("session.timeout")) {
 
         Auth::logoutAttempt();
 

@@ -15,24 +15,24 @@ class Router
 {
     protected Request $request;
     protected Response $response;
-    protected Vector $routes;
+    public static Vector $routes;
     public Route $current_route;
 
     public function __construct(Request $request, Response $response)
     {
         $this->request = $request;
         $this->response = $response;
-        $this->routes = new Vector();
+        static::$routes = new Vector([]);
     }
 
     public function get(string $path, array $details)
     {
-        $this->routes->add(new Route($path, $details, "get"));
+        static::$routes->add(new Route($path, $details, "get"));
     }
 
     public function post(string $path, array $details)
     {
-        $this->routes->add(new Route($path, $details, "post"));
+        static::$routes->add(new Route($path, $details, "post"));
     }
 
     public function resolve()
@@ -76,7 +76,7 @@ class Router
 
     public function find($path, $method = null, $name = null)
     {
-        $routes = $this->routes;
+        $routes = static::$routes;
 
         if (!is_null($path))
             $routes = $routes->filter(function ($r) use ($path) {

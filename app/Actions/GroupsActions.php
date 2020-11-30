@@ -2,13 +2,14 @@
 
 namespace MasterStudents\Actions;
 
+use MasterStudents\Models\Group;
 use MasterStudents\Models\Permission;
 
-trait PermissionActions
+trait GroupsActions
 {
   public static function createAction(array $data)
   {
-    $validator = request()->validate(Permission::registrationRules());
+    $validator = request()->validate(Group::registrationRules());
 
     if ($validator->fails()) return (object) [
       "server_error" => false,
@@ -17,7 +18,7 @@ trait PermissionActions
     ];
 
     try {
-      $permission = Permission::create($data);
+      $group = Group::create($data);
     } catch (\Exception $e) {
       return (object) [
         "server_error" => true
@@ -27,13 +28,13 @@ trait PermissionActions
     return (object) [
       "server_error" => false,
       "created" => true,
-      "permission" => $permission
+      "group" => $group
     ];
   }
 
   public static function updateAction(array $data, $id)
   {
-    $validator = request()->validate(Permission::updateRules());
+    $validator = request()->validate(Group::updateRules());
 
     if ($validator->fails()) return (object) [
       "server_error" => false,
@@ -41,10 +42,8 @@ trait PermissionActions
       "validator" => $validator
     ];
 
-    $data = array_filter($data, fn ($v, $k) => $k !== "key", ARRAY_FILTER_USE_BOTH);
-
     try {
-      $permission = Permission::find($id)->update($data);
+      $group = Group::find($id)->update($data);
     } catch (\Exception $e) {
       return (object) [
         "server_error" => true
@@ -54,14 +53,14 @@ trait PermissionActions
     return (object) [
       "server_error" => false,
       "updated" => true,
-      "permission" => $permission
+      "group" => $group
     ];
   }
 
   public static function deleteAction($id)
   {
     try {
-      Permission::find($id)->delete();
+      Group::find($id)->delete();
     } catch (\Exception $e) {
       return (object) [
         "server_error" => true

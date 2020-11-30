@@ -58,7 +58,7 @@ use MasterStudents\Core\Session;
             </div>
             <div class="navbar-nav ml-auto">
                 <?php if (Auth::check()) : ?>
-                    <?php if (Auth::user()->hasRoleKey("super_admin")) : ?>
+                    <?php if (Auth::user()->can("view_admin_panel")) : ?>
                         <a class="nav-link <?php echo router()->current_route->name == "auth.login" ? "active" : ""; ?>" href="<?php echo url("admin.index") ?>">Admin</a>
                     <?php endif; ?>
                     <form action="<?php echo url("auth.logout"); ?>" method="post">

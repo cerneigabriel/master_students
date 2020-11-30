@@ -3,11 +3,11 @@
 namespace MasterStudents\Models;
 
 use MasterStudents\Core\Model;
-use MasterStudents\Actions\PermissionActions;
+use MasterStudents\Actions\PermissionsActions;
 
 class Permission extends Model
 {
-    use PermissionActions;
+    use PermissionsActions;
 
     public $table = "permissions";
     public $primaryKey = "id";

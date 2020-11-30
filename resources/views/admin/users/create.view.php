@@ -103,7 +103,10 @@ use MasterStudents\Core\Session;
 
         <div class="form-group">
           <label for="gender">Gender</label>
-          <input type="text" name="gender" class="form-control <?php echo isset($errors) && !is_null($errors->first("gender")) ? "is-invalid" : ""; ?>" id="gender" value="<?php echo isset($model) ? $model->get("gender") : ""; ?>" aria-describedby="gender_error">
+          <select name="gender" class="form-control <?php echo isset($errors) && !is_null($errors->first("gender")) ? "is-invalid" : ""; ?>" id="gender" value="<?php echo isset($model) ? $model->get("gender") : ""; ?>" aria-describedby="gender_error">
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+          </select>
           <div id="gender_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("gender") : ""; ?></div>
         </div>
 
@@ -147,3 +150,5 @@ use MasterStudents\Core\Session;
     </div>
   </div>
 </div>
+
+<script src="<?php echo assets("assets/js/auth/register.js"); ?>"></script>

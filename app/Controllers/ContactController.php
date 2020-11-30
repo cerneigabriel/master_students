@@ -9,11 +9,23 @@ use MasterStudents\Core\View;
 
 class ContactController extends Controller
 {
-    public function index()
+    /**
+     * Index Page
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function index(Request $request)
     {
         return View::view("frontend.contact")->render();
     }
 
+    /**
+     * Contact Attempt Method
+     *
+     * @param Request $request
+     * @return void
+     */
     public function send(Request $request)
     {
         return "Form submited";

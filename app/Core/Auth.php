@@ -125,7 +125,7 @@ class Auth
     {
         $user = User::query(fn ($query) => ($query->where("email", $email_username)->orWhere("username", $email_username)))->first();
 
-        if (!is_null($user) && password_verify($password, $user->password)) {
+        if (!is_null($user) && Hash::check($password, $user->password)) {
             static::$user_session = UserSession::login($user, static::$CSRF_TOKEN, $remember_me);
             static::$user = $user;
 

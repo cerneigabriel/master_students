@@ -19,7 +19,7 @@ trait UserRolesManagement
                     ->select("roles.*")
                     ->innerJoin('user_role')
                     ->on(['roles.id' => 'user_role.role_id'])
-                    ->onWhere('user_role.user_id', $this->{$this->primaryKey});
+                    ->where('user_role.user_id', $this->{$this->primaryKey});
             })->get()
         );
     }

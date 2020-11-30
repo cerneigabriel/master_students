@@ -5,6 +5,7 @@ namespace MasterStudents\Actions\SecurityManagement;
 use Carbon\Carbon;
 use Collections\Map;
 use MasterStudents\Models\Permission;
+use Spiral\Database\Injection\Parameter;
 
 trait UserPermissionsManagement
 {
@@ -14,12 +15,23 @@ trait UserPermissionsManagement
     private function allPremissions()
     {
         return map(
-            Permission::query(function ($query) {
+            Permission::query(function ($repo, $query) {
                 return $query
-                    ->select("permissions.*")
-                    ->innerJoin('user_permission')
-                    ->on(['permissions.id' => 'user_permission.permission_id'])
-                    ->onWhere('user_permission.user_id', $this->{$this->primaryKey});
+                    ->query("
+                        SELECT permissions.*
+                        FROM permissions
+                        INNER JOIN role_permission
+                            ON permissions.id = role_permission.permission_id
+                        INNER JOIN user_role
+                            ON role_permission.role_id = user_role.role_id
+                        WHERE user_role.user_id = {$this->{$this->primaryKey}}
+                        UNION
+                        SELECT permissions.*
+                        FROM permissions
+                        INNER JOIN user_permission
+                            ON permissions.id = user_permission.permission_id
+                        WHERE user_permission.user_id = {$this->{$this->primaryKey}}
+                    ");
             })->get()
         );
     }
@@ -156,6 +168,24 @@ trait UserPermissionsManagement
     }
 
     /**
+     * Roles Permissions
+     *
+     * @return void
+     */
+    public function rolesPermissions()
+    {
+        $permissions = vector();
+
+        map($this->roles())->each(function ($role) use ($permissions) {
+            // var_dump($role->permissions());
+            $permissions->addAll($role->permissions());
+            // map($role->permissions())->each(fn ($p) => $permissions->add($p));
+        });
+
+        return $permissions->toArray();
+    }
+
+    /**
      * Check if Permission has specific Permission
      *
      * @param Permission $permission
@@ -163,7 +193,7 @@ trait UserPermissionsManagement
      */
     public function hasPermission(Permission $permission): bool
     {
-        return in_array($permission->id, map($this->all_permissions())->map(fn ($v) => $v->{$v->primaryKey})->toArray());
+        return in_array($permission->id, map($this->allPremissions())->map(fn ($v) => $v->{$v->primaryKey})->toArray());
     }
 
     /**
@@ -174,7 +204,7 @@ trait UserPermissionsManagement
      */
     public function hasPermissionKey(string $key)
     {
-        return in_array($key, map($this->all_permissions())->map(fn ($v) => $v->key)->toArray());
+        return in_array($key, map($this->allPremissions())->map(fn ($v) => $v->key)->toArray());
     }
 
     /**

@@ -59,7 +59,7 @@ class Permission extends Model
                 ->select("roles.*")
                 ->innerJoin('role_permission')
                 ->on(['roles.id' => 'role_permission.role_id'])
-                ->onWhere('role_permission.permission_id', $this->id);
+                ->where('role_permission.permission_id', $this->id);
         })->get();
     }
 }

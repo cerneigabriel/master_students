@@ -145,33 +145,4 @@ class User extends Model
     {
         return UserSession::query(fn ($q) => $q->select("sessions.*")->where('sessions.user_id', $this->id))->get();
     }
-
-    public function all_permissions()
-    {
-        return Permission::query(function ($query) {
-            return $query
-                ->select("permissions.*")
-
-                ->innerJoin('role_permission')
-                ->on(['permissions.id' => 'role_permission.permission_id'])
-
-                ->innerJoin('user_role')
-                ->on(['role_permission.role_id' => 'user_role.role_id'])
-
-                ->onWhere('user_role.user_id', $this->id);
-        })->get() + $this->permissions();
-    }
-
-    public function rolesPermissions()
-    {
-        $permissions = vector();
-
-        map($this->roles())->each(function ($role) use ($permissions) {
-            // var_dump($role->permissions());
-            $permissions->addAll($role->permissions());
-            // map($role->permissions())->each(fn ($p) => $permissions->add($p));
-        });
-
-        return $permissions->toArray();
-    }
 }

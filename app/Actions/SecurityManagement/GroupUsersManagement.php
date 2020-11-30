@@ -19,7 +19,7 @@ trait GroupUsersManagement
           ->select("users.*")
           ->innerJoin('group_user')
           ->on(['users.id' => 'group_user.user_id'])
-          ->onWhere('group_user.group_id', $this->{$this->primaryKey});
+          ->where('group_user.group_id', $this->{$this->primaryKey});
       })->get()
     );
   }

@@ -30,7 +30,7 @@ $group = Group::find($model->get("id"));
             <label for="user_input">Leader</label>
             <select class="form-control d-block <?php echo isset($errors) && !is_null($errors->first("user_id")) ? "is-invalid" : ""; ?>" name="user_id" id="user_input" value="<?php echo $group->user_id ?>" aria-describedby="user_id_error">
               <?php foreach ($users as $user) : ?>
-                <option value="<?php echo $user->id ?>"><?php echo "$user->first_name $user->last_name" ?></option>
+                <option value="<?php echo $user->id ?>" <?php echo $model->get("user_id") === $user->id ? "selected" : "" ?>><?php echo "$user->first_name $user->last_name" ?></option>
               <?php endforeach; ?>
             </select>
             <div id="user_id_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("user_id") : ""; ?></div>
@@ -86,29 +86,59 @@ $group = Group::find($model->get("id"));
       </div>
     </div>
   </div>
-</div>
-<!--Row-->
 
-<!-- Modal Logout -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <!-- Students -->
+  <div class="col-lg-12 pb-4">
+    <div class="card h-100">
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Students</h6>
       </div>
-      <div class="modal-body">
-        <p>Are you sure you want to logout?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-        <a href="login.html" class="btn btn-primary">Logout</a>
+      <div class="card-body">
+        <div class="table-responsive p-3">
+          <table class="table align-items-center table-flush table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th>Id</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Zoom Link</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tfoot class="tfoot-light">
+              <tr>
+                <th>Id</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Zoom Link</th>
+                <th>Actions</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <?php foreach ($group->users() as $user) : ?>
+                <tr>
+                  <td><?php echo $user->id ?></td>
+                  <td><?php echo "$user->first_name $user->last_name" ?></td>
+                  <td><?php echo $user->email ?></td>
+                  <td><?php echo $user->phone ?></td>
+                  <td><?php echo $user->gender === "m" ? "Male" : "Female" ?></td>
+                  <td><?php echo $user->zoom_link ?></td>
+                  <td>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<!--Row-->
 
 <script>
   $(document).ready(function() {

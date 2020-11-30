@@ -19,7 +19,7 @@ trait RolePermissionsManagement
                     ->select("permissions.*")
                     ->innerJoin('role_permission')
                     ->on(['permissions.id' => 'role_permission.permission_id'])
-                    ->onWhere('role_permission.role_id', $this->{$this->primaryKey});
+                    ->where('role_permission.role_id', $this->{$this->primaryKey});
             })->get()
         );
     }

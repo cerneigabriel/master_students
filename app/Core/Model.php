@@ -93,7 +93,7 @@ abstract class Model
 
     private function query(callable $fn)
     {
-        $this->result = $fn($this->repository)->fetchAll();
+        $this->result = $fn($this->repository, $this->db)->fetchAll();
 
         return $this;
     }

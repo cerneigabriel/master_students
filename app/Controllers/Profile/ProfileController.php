@@ -26,7 +26,7 @@ class ProfileController extends Controller
      */
     public function index(Request $request)
     {
-        return View::view("master_student.profile.dashboard", [
+        return View::view("student.profile.dashboard", [
             "user" => Auth::user()
         ])->render();
     }

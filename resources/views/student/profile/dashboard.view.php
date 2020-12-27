@@ -1,1 +1,0 @@
-<h1>Dashboard - <?php echo "$user->first_name $user->last_name"; ?></h1>

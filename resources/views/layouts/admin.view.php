@@ -57,7 +57,7 @@ use MasterStudents\Core\Session;
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo url("admin.index"); ?>">
                 <div class="sidebar-brand-icon">
                     <img src="<?php echo assets("assets/images/icons/master_students_logo.png"); ?>" alt="" height="40px" class="mr-2">
                 </div>
@@ -77,38 +77,46 @@ use MasterStudents\Core\Session;
 
             <hr class="sidebar-divider">
 
-            <?php if (Auth::user()->can("view_admin_security")) : ?>
+            <?php if (Auth::user()->can("view_admin_security") || Auth::user()->can(["view_admin_users", "view_admin_roles", "view_admin_permissions"])) : ?>
                 <div class="sidebar-heading">
                     Security
                 </div>
 
-                <li class="nav-item <?php echo router()->current_route->name == "admin.users.index" ? "active" : ""; ?>">
-                    <a class="nav-link" href="<?php echo url("admin.users.index"); ?>">
-                        <i class="fas fa-fw fa-users"></i>
-                        <span>Users</span>
-                    </a>
-                </li>
-                <li class="nav-item <?php echo router()->current_route->name == "admin.roles.index" ? "active" : ""; ?>">
-                    <a class="nav-link" href="<?php echo url("admin.roles.index"); ?>">
-                        <i class="fas fa-fw fa-user-tag"></i>
-                        <span>
-                            Roles
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item <?php echo router()->current_route->name == "admin.permissions.index" ? "active" : ""; ?>">
-                    <a class="nav-link" href="<?php echo url("admin.permissions.index"); ?>">
-                        <i class="fas fa-fw fa-clipboard-check"></i>
-                        <span>
-                            Permissions
-                        </span>
-                    </a>
-                </li>
+                <?php if (Auth::user()->can("view_admin_users")) : ?>
+                    <li class="nav-item <?php echo router()->current_route->name == "admin.users.index" ? "active" : ""; ?>">
+                        <a class="nav-link" href="<?php echo url("admin.users.index"); ?>">
+                            <i class="fas fa-fw fa-users"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+                
+                <?php if (Auth::user()->can("view_admin_roles")) : ?>
+                    <li class="nav-item <?php echo router()->current_route->name == "admin.roles.index" ? "active" : ""; ?>">
+                        <a class="nav-link" href="<?php echo url("admin.roles.index"); ?>">
+                            <i class="fas fa-fw fa-user-tag"></i>
+                            <span>
+                                Roles
+                            </span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+                
+                <?php if (Auth::user()->can("view_admin_permissions")) : ?>
+                    <li class="nav-item <?php echo router()->current_route->name == "admin.permissions.index" ? "active" : ""; ?>">
+                        <a class="nav-link" href="<?php echo url("admin.permissions.index"); ?>">
+                            <i class="fas fa-fw fa-clipboard-check"></i>
+                            <span>
+                                Permissions
+                            </span>
+                        </a>
+                    </li>
+                <?php endif; ?>
             <?php endif; ?>
 
             <hr class="sidebar-divider">
 
-            <?php if (Auth::user()->can("view_admin_students_repartisation")) : ?>
+            <?php if (Auth::user()->can("view_admin_students_repartisation") || Auth::user()->can(["view_admin_groups"])) : ?>
                 <div class="sidebar-heading">
                     Students Repartisation
                 </div>

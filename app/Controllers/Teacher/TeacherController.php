@@ -1,6 +1,6 @@
 <?php
 
-namespace MasterStudents\Controllers\Profile;
+namespace MasterStudents\Controllers\Teacher;
 
 use MasterStudents\Core\Auth;
 use MasterStudents\Core\View;
@@ -9,8 +9,14 @@ use MasterStudents\Core\View;
 use MasterStudents\Core\Request;
 use MasterStudents\Core\Controller;
 
-class ProfileController extends Controller
+class TeacherController extends Controller
 {
+    /**
+     * Define default permissions for controller
+     *
+     * @var array
+     */
+    protected $defaultHandlers = ["view_teacher_panel"];
     /**
      * Specify table name for repository initializer
      *
@@ -26,8 +32,8 @@ class ProfileController extends Controller
      */
     public function index(Request $request)
     {
-        return View::view("student.profile.dashboard", [
-            "user" => Auth::user()
-        ])->render();
+        $this->runHandler(["view_teacher_dashboard"]);
+
+        return View::view("teacher.index")->render();
     }
 }

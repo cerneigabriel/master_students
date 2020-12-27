@@ -3,28 +3,28 @@
 /**
  * Admin Roles Routes
  */
-router()->get("/admin/roles", getAdminRouteDetails("Admin\RolesController::index", "admin.roles.index"));
+router()->get("{$admin_prefix}/roles", getAdminRouteDetails("RolesController::index", "roles.index"));
 
-router()->get("/admin/roles/create", getAdminRouteDetails("Admin\RolesController::create", "admin.roles.create"));
+router()->get("{$admin_prefix}/roles/create", getAdminRouteDetails("RolesController::create", "roles.create"));
 
-router()->post("/admin/roles", getAdminRouteDetails("Admin\RolesController::store", "admin.roles.store"));
+router()->post("{$admin_prefix}/roles", getAdminRouteDetails("RolesController::store", "roles.store"));
 
-router()->get("/admin/roles/{id}/edit", getAdminRouteDetails("Admin\RolesController::edit", "admin.roles.edit"));
+router()->get("{$admin_prefix}/roles/{id}/edit", getAdminRouteDetails("RolesController::edit", "roles.edit"));
 
-router()->post("/admin/roles/{id}", getAdminRouteDetails("Admin\RolesController::update", "admin.roles.update"));
+router()->post("{$admin_prefix}/roles/{id}", getAdminRouteDetails("RolesController::update", "roles.update"));
 
-router()->post("/admin/roles/{id}/delete", getAdminRouteDetails("Admin\RolesController::delete", "admin.roles.delete"));
+router()->post("{$admin_prefix}/roles/{id}/delete", getAdminRouteDetails("RolesController::delete", "roles.delete"));
 
 
 // Detach permission or permissions
-router()->post("/admin/roles/{role_id}/permissions/{permission_id}/detach", getAdminRouteDetails("Admin\RolesController::detachPermission", "admin.roles.detach_permission"));
+router()->post("{$admin_prefix}/roles/{role_id}/permissions/{permission_id}/detach", getAdminRouteDetails("RolesController::detachPermission", "roles.detach_permission"));
 
-router()->post("/admin/roles/{role_id}/permissions/detach", getAdminRouteDetails("Admin\RolesController::detachPermissions", "admin.roles.detach_permissions"));
+router()->post("{$admin_prefix}/roles/{role_id}/permissions/detach", getAdminRouteDetails("RolesController::detachPermissions", "roles.detach_permissions"));
 
 // Attach permission or permissions
-router()->post("/admin/roles/{role_id}/permissions/{permission_id}/attach", getAdminRouteDetails("Admin\RolesController::attachPermission", "admin.roles.attach_permission"));
+router()->post("{$admin_prefix}/roles/{role_id}/permissions/{permission_id}/attach", getAdminRouteDetails("RolesController::attachPermission", "roles.attach_permission"));
 
-router()->post("/admin/roles/{role_id}/permissions/attach", getAdminRouteDetails("Admin\RolesController::attachPermissions", "admin.roles.attach_permissions"));
+router()->post("{$admin_prefix}/roles/{role_id}/permissions/attach", getAdminRouteDetails("RolesController::attachPermissions", "roles.attach_permissions"));
 
 
-router()->post("/admin/roles/{role_id}/permissions/update", getAdminRouteDetails("Admin\RolesController::updatePermissions", "admin.roles.update_permissions"));
+router()->post("{$admin_prefix}/roles/{role_id}/permissions/update", getAdminRouteDetails("RolesController::updatePermissions", "roles.update_permissions"));

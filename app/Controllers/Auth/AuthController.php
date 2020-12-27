@@ -61,7 +61,11 @@ class AuthController extends Controller
         if (Auth::loginAttempt($request->get("email"), $request->get("password"), $remember_me)) {
             Session::set("success", "You are logged in.");
 
-            return response()->redirect(url("profile.index"));
+            $user = User::query(fn ($q) => $q->where("email", $request->get("email")))->first();
+
+            $role = map($user->roles())->first();
+
+            return response()->redirect(url("{$role->key}.index"));
         }
 
         Session::set("error", "Email or password does not match our records.");
@@ -84,6 +88,8 @@ class AuthController extends Controller
 
         if ($user->server_error) return response()->redirect(url("error", ["code" => 500]));
         if (!$user->created) return response()->handleErrorWithView($user->validator, $request, "frontend.auth.register");
+
+        $user->user->attachRoleKey("student");
 
         Session::set("success", "You have successfully registered");
 

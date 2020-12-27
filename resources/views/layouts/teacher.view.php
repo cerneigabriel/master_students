@@ -57,15 +57,15 @@ use MasterStudents\Core\Session;
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo url("student.index"); ?>">
-                <div class="sidebar-brand-text text-left mx-3">Student Panel</div>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo url("teacher.index"); ?>">
+                <div class="sidebar-brand-text text-left mx-3">Teacher Panel</div>
             </a>
 
             <hr class="sidebar-divider my-0">
 
-            <?php if (Auth::user()->can("view_student_dashboard")) : ?>
-                <li class="nav-item <?php echo router()->current_route->name == "student.index" ? "active" : ""; ?>">
-                    <a class="nav-link" href="<?php echo url("student.index"); ?>">
+            <?php if (Auth::user()->can("view_teacher_dashboard")) : ?>
+                <li class="nav-item <?php echo router()->current_route->name == "teacher.index" ? "active" : ""; ?>">
+                    <a class="nav-link" href="<?php echo url("teacher.index"); ?>">
                         <i class="fas fa-fw fa-chart-line"></i>
                         <span>Dashboard</span>
                     </a>

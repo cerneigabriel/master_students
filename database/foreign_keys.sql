@@ -10,8 +10,11 @@ ALTER TABLE `role_permission` ADD  CONSTRAINT `permission_role_fk` FOREIGN KEY (
 ALTER TABLE `user_permission` ADD  CONSTRAINT `user_permission_fk` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `user_permission` ADD  CONSTRAINT `permission_user_fk` FOREIGN KEY (`permission_id`) REFERENCES `permissions`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `groups` ADD  CONSTRAINT `user_group_fk` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `specialities` ADD  CONSTRAINT `speciality_language_fk` FOREIGN KEY (`language_id`) REFERENCES `languages`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `groups` ADD  CONSTRAINT `group_spaciality_fk` FOREIGN KEY (`speciality_id`) REFERENCES `specialities`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `group_user` ADD  CONSTRAINT `group_user_fk` FOREIGN KEY (`group_id`) REFERENCES `groups`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `group_user` ADD  CONSTRAINT `group_user_role_fk` FOREIGN KEY (`role_id`) REFERENCES `roles`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `group_user` ADD  CONSTRAINT `user_group_sdfsdf_fk` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 SET FOREIGN_KEY_CHECKS=1;

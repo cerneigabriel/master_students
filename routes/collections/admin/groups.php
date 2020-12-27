@@ -3,28 +3,28 @@
 /**
  * Admin Groups Routes
  */
-router()->get("/admin/groups", getAdminRouteDetails("Admin\GroupsController::index", "admin.groups.index"));
+router()->get("{$admin_prefix}/groups", getAdminRouteDetails("GroupsController::index", "groups.index"));
 
-router()->get("/admin/groups/create", getAdminRouteDetails("Admin\GroupsController::create", "admin.groups.create"));
+router()->get("{$admin_prefix}/groups/create", getAdminRouteDetails("GroupsController::create", "groups.create"));
 
-router()->post("/admin/groups", getAdminRouteDetails("Admin\GroupsController::store", "admin.groups.store"));
+router()->post("{$admin_prefix}/groups", getAdminRouteDetails("GroupsController::store", "groups.store"));
 
-router()->get("/admin/groups/{id}/edit", getAdminRouteDetails("Admin\GroupsController::edit", "admin.groups.edit"));
+router()->get("{$admin_prefix}/groups/{id}/edit", getAdminRouteDetails("GroupsController::edit", "groups.edit"));
 
-router()->post("/admin/groups/{id}", getAdminRouteDetails("Admin\GroupsController::update", "admin.groups.update"));
+router()->post("{$admin_prefix}/groups/{id}", getAdminRouteDetails("GroupsController::update", "groups.update"));
 
-router()->post("/admin/groups/{id}/delete", getAdminRouteDetails("Admin\GroupsController::delete", "admin.groups.delete"));
+router()->post("{$admin_prefix}/groups/{id}/delete", getAdminRouteDetails("GroupsController::delete", "groups.delete"));
 
 
 // Detach user or users
-router()->post("/admin/groups/{group_id}/users/{user_id}/detach", getAdminRouteDetails("Admin\GroupsController::detachUser", "admin.groups.detach_user"));
+router()->post("{$admin_prefix}/groups/{group_id}/users/{user_id}/detach", getAdminRouteDetails("GroupsController::detachUser", "groups.detach_user"));
 
-router()->post("/admin/groups/{group_id}/users/detach", getAdminRouteDetails("Admin\GroupsController::detachUsers", "admin.groups.detach_users"));
+router()->post("{$admin_prefix}/groups/{group_id}/users/detach", getAdminRouteDetails("GroupsController::detachUsers", "groups.detach_users"));
 
 // Attach user or users
-router()->post("/admin/groups/{group_id}/users/{user_id}/attach", getAdminRouteDetails("Admin\GroupsController::attachUser", "admin.groups.attach_user"));
+router()->post("{$admin_prefix}/groups/{group_id}/users/{user_id}/attach", getAdminRouteDetails("GroupsController::attachUser", "groups.attach_user"));
 
-router()->post("/admin/groups/{group_id}/users/attach", getAdminRouteDetails("Admin\GroupsController::attachUsers", "admin.groups.attach_users"));
+router()->post("{$admin_prefix}/groups/{group_id}/users/attach", getAdminRouteDetails("GroupsController::attachUsers", "groups.attach_users"));
 
 
-router()->post("/admin/groups/{group_id}/users/update", getAdminRouteDetails("Admin\GroupsController::updateUsers", "admin.groups.update_users"));
+router()->post("{$admin_prefix}/groups/{group_id}/users/update", getAdminRouteDetails("GroupsController::updateUsers", "groups.update_users"));

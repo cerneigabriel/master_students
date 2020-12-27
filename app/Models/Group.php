@@ -17,19 +17,18 @@ class Group extends Model
     public $timestamps = true;
 
     public $fillable = [
-        "user_id",
+        "speciality_id",
         "name",
         "year"
     ];
 
     public $relationships = [
-        "user",
         "users",
     ];
 
     public $casts = [
         "id" => "integer",
-        "user_id" => "integer",
+        "speciality_id" => "integer",
         "name" => "string",
         "year" => "string",
     ];
@@ -37,7 +36,7 @@ class Group extends Model
     public static function rules()
     {
         return [
-            "user_id" => ["required", "exists_in_table:users,id"],
+            "speciality_id" => ["required", "exists_in_table:specialities,id"],
             "name" => ["required", "max:50"],
             "year" => ["required", "date:Y"],
         ];
@@ -58,9 +57,9 @@ class Group extends Model
         return self::rules();
     }
 
-    public function leader()
+    public function speciality()
     {
-        return User::find($this->user_id);
+        return Speciality::find($this->user_id);
     }
 
     public function users()

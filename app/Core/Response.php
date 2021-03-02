@@ -29,8 +29,7 @@ class Response
 
     public function redirect($path)
     {
-        Header("Location: $path");
-        exit();
+        exit(Header("Location: $path"));
     }
 
     public function handleErrorWithView($validator, Request $request, string $view, $model = null, array $params = [])

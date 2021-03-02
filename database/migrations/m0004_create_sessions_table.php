@@ -4,7 +4,7 @@ use MasterStudents\Core\Migration;
 use Spiral\Database\ForeignKeyInterface;
 use Spiral\Database\Injection\Fragment;
 
-class m0003_create_sessions_table extends Migration
+class m0004_create_sessions_table extends Migration
 {
     public function up()
     {
@@ -25,7 +25,19 @@ class m0003_create_sessions_table extends Migration
 
             $schema->index(["token"])->unique(true);
 
-            return $schema;
+            return [
+                "schema" => $schema,
+                "foreign_keys" => [
+                    [
+                        "table" => "sessions",
+                        "foreign_key" => "user_id",
+                        "references" => "id",
+                        "on" => "users",
+                        "delete" => "CASCADE",
+                        "update" => "CASCADE"
+                    ]
+                ]
+            ];
         }
     }
 
@@ -34,8 +46,3 @@ class m0003_create_sessions_table extends Migration
         $this->db->table("sessions")->drop();
     }
 }
-
-// After migrating tables, you'll need some references between them, add these lines of code will help you pass through this challenge.
-// SET FOREIGN_KEY_CHECKS=0;
-// ALTER TABLE `sessions` ADD  CONSTRAINT `user_session_fk` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-// SET FOREIGN_KEY_CHECKS=1

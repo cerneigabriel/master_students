@@ -4,6 +4,7 @@ namespace MasterStudents\Actions;
 
 use MasterStudents\Core\Hash;
 use MasterStudents\Models\User;
+use MasterStudents\Models\UserStatus;
 
 trait UserActions
 {
@@ -17,10 +18,13 @@ trait UserActions
       "validator" => $validator
     ];
 
-    try {
-      $data["password"] = Hash::make($data["password"]);
+    $user_status = UserStatus::query(fn ($q) => $q->where("key", "active"))->first();
 
-      $user = User::create($data);
+    $data["password"] = Hash::make($data["password"]);
+    $data["user_status_id"] = $user_status->id;
+
+    $user = User::create($data);
+    try {
     } catch (\Exception $e) {
       return (object) [
         "server_error" => true

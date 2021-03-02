@@ -3,7 +3,7 @@
 use MasterStudents\Core\Migration;
 use Spiral\Database\Injection\Fragment;
 
-class m0000_create_users_table extends Migration
+class m0001_create_users_table extends Migration
 {
     public function up()
     {
@@ -12,6 +12,7 @@ class m0000_create_users_table extends Migration
         if (!$schema->exists()) {
             $schema->primary("id");
 
+            $schema->integer("user_status_id")->nullable(false);
             $schema->string("username", 50)->nullable(false);
             $schema->string("first_name", 50)->nullable(false);
             $schema->string("last_name", 50)->nullable(false);
@@ -31,7 +32,19 @@ class m0000_create_users_table extends Migration
 
             $schema->index(["username", "email"])->unique(true);
 
-            return $schema;
+            return [
+                "schema" => $schema,
+                "foreign_keys" => [
+                    [
+                        "table" => "users",
+                        "foreign_key" => "user_status_id",
+                        "references" => "id",
+                        "on" => "user_statuses",
+                        "delete" => "CASCADE",
+                        "update" => "CASCADE"
+                    ]
+                ]
+            ];
         }
     }
 

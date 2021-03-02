@@ -25,9 +25,9 @@ class Speciality extends Model
     public $casts = [
         "id" => "integer",
         "language_id" => "integer",
-        "name" => "name",
-        "abbreviation" => "abbreviation",
-        "duration" => "duration",
+        "name" => "string",
+        "abbreviation" => "string",
+        "duration" => "integer",
     ];
 
     public static function rules()

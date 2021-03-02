@@ -19,6 +19,7 @@ class User extends Model
     public $timestamps = true;
 
     public $fillable = [
+        "user_status_id",
         "first_name",
         "last_name",
         "username",
@@ -35,6 +36,7 @@ class User extends Model
     ];
 
     public $relationships = [
+        "user_status",
         "roles",
         "sessions",
         "permissions",
@@ -43,6 +45,7 @@ class User extends Model
 
     public $casts = [
         "id" => "integer",
+        "user_status_id" => "integer",
         "username" => "string",
         "first_name" => "string",
         "last_name" => "string",
@@ -61,6 +64,7 @@ class User extends Model
     public static function rules()
     {
         return [
+            "user_status_id" => ["required", "exists_in_table:user_statuses,id"],
             "username" => ["required", "max:50"],
             "first_name" => ["required", "max:50"],
             "last_name" => ["required", "max:50"],
@@ -144,5 +148,9 @@ class User extends Model
     public function sessions()
     {
         return UserSession::query(fn ($q) => $q->select("sessions.*")->where('sessions.user_id', $this->id))->get();
+    }
+
+    public function user_status() {
+        return UserStatus::find($this->user_status_id);
     }
 }

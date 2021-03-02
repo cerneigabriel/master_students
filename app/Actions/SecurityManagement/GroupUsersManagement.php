@@ -33,11 +33,13 @@ trait GroupUsersManagement
   public function attachUser(User $user)
   {
     if (!$this->hasuser($user)) {
+      $role = Role::query(fn ($q) => $q->where("name", "student"))->first();
       $this->db
         ->insert("group_user")
         ->values([
           "group_id" => $this->{$this->primaryKey},
           "user_id" => $user->{$user->primaryKey},
+          "role_id" => $role->id,
           "created_at" => Carbon::now()->toDateTimeString(),
           "updated_at" => Carbon::now()->toDateTimeString(),
         ])

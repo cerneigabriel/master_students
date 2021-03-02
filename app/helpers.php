@@ -113,3 +113,4 @@ function csrf_input()
 {
     return "<input type=\"hidden\" name=\"_token\" value=\"" . Session::get("_token") . "\">";
 }
+

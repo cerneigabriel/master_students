@@ -24,6 +24,8 @@ class Group extends Model
 
     public $relationships = [
         "users",
+        "members",
+        "speciality"
     ];
 
     public $casts = [
@@ -59,7 +61,7 @@ class Group extends Model
 
     public function speciality()
     {
-        return Speciality::find($this->user_id);
+        return Speciality::find($this->speciality_id);
     }
 
     public function users()
@@ -73,44 +75,7 @@ class Group extends Model
         })->get();
     }
 
-    public function hasStudent(User $user)
-    {
-        return in_array($user->id, map($this->masterStudents())->map(fn ($v) => $v->id)->toArray());
-    }
-
-    public function detachAllUsers()
-    {
-        $this->db
-            ->table("group_user")
-            ->delete()
-            ->where("group_id", $this->id)
-            ->run();
-    }
-
-    public function detachStudent(User $user)
-    {
-        if ($this->hasStudent($user))
-            $this->db
-                ->table("group_user")
-                ->delete()
-                ->where("group_id", $this->id)
-                ->where("user_id", $user->id)
-                ->run();
-    }
-
-    public function attachStudent(User $user)
-    {
-        if (!$this->hasStudent($user)) {
-            $this->db
-                ->insert("group_user")
-                ->values([
-                    "group_id" => $this->id,
-                    "user_id" => $user->id,
-                    "activated" => false,
-                    "created_at" => Carbon::now()->toDateTimeString(),
-                    "updated_at" => Carbon::now()->toDateTimeString(),
-                ])
-                ->run();
-        }
+    public function members() {
+        return GroupUser::query(fn ($q) => $q->where("group_id", $this->id))->get();
     }
 }

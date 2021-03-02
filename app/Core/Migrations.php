@@ -13,6 +13,8 @@ class Migrations
     protected $table = "migrations";
     protected $repository;
 
+    protected $foreign_keys;
+
     public function __construct()
     {
         $this->selectDatabase();
@@ -31,13 +33,18 @@ class Migrations
         $migrations = [];
         $reflector = new Reflector();
 
+        $this->foreign_keys = [];
+
         foreach ($toApplyMigrations as $migration) {
             require_once MIGRATIONS_PATH . $migration . ".php";
 
             $migrations[] = $class = new $migration();
 
             $this->log("Migrate: $migration");
-            $reflector->addTable($class->selectDatabase()->up());
+            $class = $class->selectDatabase()->up();
+
+            $reflector->addTable($class["schema"]);
+            $this->foreign_keys = array_merge($this->foreign_keys, $class["foreign_keys"] ?? []);
         }
 
         $reflector->run();
@@ -46,6 +53,10 @@ class Migrations
             $class->register();
             $this->log("Migrated: $migration");
         }
+        
+        $this->attachForeignKeys();
+        $this->log("Foreign Keys was created");
+
 
         $this->log((count($toApplyMigrations) === 0 ? "Nothing to migrate" : "All migrations are applied"));
     }
@@ -94,6 +105,18 @@ class Migrations
         $toApplyMigrations = array_diff($migrations, $migrated);
 
         return $toApplyMigrations;
+    }
+
+    protected function attachForeignKeys() :void {
+        $query = "SET FOREIGN_KEY_CHECKS=0;";
+
+        foreach($this->foreign_keys as $item) {
+            $query .= "ALTER TABLE `{$item["table"]}` ADD CONSTRAINT `fk_{$item["table"]}_{$item["foreign_key"]}_" . time() . "` FOREIGN KEY (`{$item["foreign_key"]}`) REFERENCES `{$item["on"]}` (`{$item["references"]}`) ON DELETE {$item["delete"]} ON UPDATE {$item["update"]};";
+        };
+        
+        $query .= "SET FOREIGN_KEY_CHECKS=1;";
+
+        $this->db->execute($query);
     }
 
     protected function log(string $message): void

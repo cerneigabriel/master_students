@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f265d5e5e3d425ac1c771c4688e363a8",
+    "content-hash": "4f12735b221f470e1e7f562902bf0adf",
     "packages": [
         {
             "name": "bcosca/fatfree-core",
-            "version": "3.7.2",
+            "version": "3.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bcosca/fatfree-core.git",
-                "reference": "a0f7ecf456a2f1e099a9b6d7aedc22970be56030"
+                "reference": "3e23ae05384b2f830e99c5888b94118819ed948b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bcosca/fatfree-core/zipball/a0f7ecf456a2f1e099a9b6d7aedc22970be56030",
-                "reference": "a0f7ecf456a2f1e099a9b6d7aedc22970be56030",
+                "url": "https://api.github.com/repos/bcosca/fatfree-core/zipball/3e23ae05384b2f830e99c5888b94118819ed948b",
+                "reference": "3e23ae05384b2f830e99c5888b94118819ed948b",
                 "shasum": ""
             },
             "require": {
@@ -37,9 +37,9 @@
             "homepage": "http://fatfreeframework.com/",
             "support": {
                 "issues": "https://github.com/bcosca/fatfree-core/issues",
-                "source": "https://github.com/bcosca/fatfree-core/tree/3.7.2"
+                "source": "https://github.com/bcosca/fatfree-core/tree/3.7.3"
             },
-            "time": "2020-05-28T16:14:27+00:00"
+            "time": "2020-12-13T12:49:39+00:00"
         },
         {
             "name": "easyframework/collections",
@@ -463,7 +463,6 @@
             "require": {
                 "bcosca/fatfree-core": "^3.6"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "classmap": [
@@ -481,24 +480,20 @@
                 "fatfree",
                 "sql"
             ],
-            "support": {
-                "issues": "https://github.com/ikkez/f3-schema-builder/issues",
-                "source": "https://github.com/ikkez/f3-schema-builder/tree/v2.2.4"
-            },
             "time": "2019-11-25T17:04:32+00:00"
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.41.5",
+            "version": "2.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "c4a9caf97cfc53adfc219043bcecf42bc663acee"
+                "reference": "d32c57d8389113742f4a88725a170236470012e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/c4a9caf97cfc53adfc219043bcecf42bc663acee",
-                "reference": "c4a9caf97cfc53adfc219043bcecf42bc663acee",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d32c57d8389113742f4a88725a170236470012e2",
+                "reference": "d32c57d8389113742f4a88725a170236470012e2",
                 "shasum": ""
             },
             "require": {
@@ -513,7 +508,7 @@
                 "kylekatarnls/multi-tester": "^2.0",
                 "phpmd/phpmd": "^2.9",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12.35",
+                "phpstan/phpstan": "^0.12.54",
                 "phpunit/phpunit": "^7.5 || ^8.0",
                 "squizlabs/php_codesniffer": "^3.4"
             },
@@ -578,20 +573,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-23T06:02:30+00:00"
+            "time": "2020-12-17T20:55:32+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.1.8",
+            "version": "v6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "917ab212fa00dc6eacbb26e8bc387ebe40993bc1"
+                "reference": "e38888a75c070304ca5514197d4847a59a5c853f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/917ab212fa00dc6eacbb26e8bc387ebe40993bc1",
-                "reference": "917ab212fa00dc6eacbb26e8bc387ebe40993bc1",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/e38888a75c070304ca5514197d4847a59a5c853f",
+                "reference": "e38888a75c070304ca5514197d4847a59a5c853f",
                 "shasum": ""
             },
             "require": {
@@ -601,9 +596,12 @@
                 "php": ">=5.5.0"
             },
             "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
                 "doctrine/annotations": "^1.2",
-                "friendsofphp/php-cs-fixer": "^2.2",
-                "phpunit/phpunit": "^4.8 || ^5.7"
+                "phpcompatibility/php-compatibility": "^9.3.5",
+                "roave/security-advisories": "dev-latest",
+                "squizlabs/php_codesniffer": "^3.5.6",
+                "yoast/phpunit-polyfills": "^0.2.0"
             },
             "suggest": {
                 "ext-mbstring": "Needed to send email in multibyte encoding charset",
@@ -643,15 +641,15 @@
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
             "support": {
                 "issues": "https://github.com/PHPMailer/PHPMailer/issues",
-                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.1.8"
+                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.2.0"
             },
             "funding": [
                 {
-                    "url": "https://github.com/synchro",
+                    "url": "https://github.com/Synchro",
                     "type": "github"
                 }
             ],
-            "time": "2020-10-09T14:55:58+00:00"
+            "time": "2020-11-25T15:24:57+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -1059,31 +1057,35 @@
         },
         {
             "name": "spiral/core",
-            "version": "v1.4.4",
+            "version": "v2.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/core.git",
-                "reference": "86ffeac422f2f368a890ccab71cf6a8b20668176"
+                "reference": "1857ece8e7f12353f1d2a92d817dcea5348d2695"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/core/zipball/86ffeac422f2f368a890ccab71cf6a8b20668176",
-                "reference": "86ffeac422f2f368a890ccab71cf6a8b20668176",
+                "url": "https://api.github.com/repos/spiral/core/zipball/1857ece8e7f12353f1d2a92d817dcea5348d2695",
+                "reference": "1857ece8e7f12353f1d2a92d817dcea5348d2695",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2",
+                "php": ">=7.2",
                 "psr/container": "^1.0"
             },
             "require-dev": {
-                "mockery/mockery": "^1.1",
-                "phpunit/phpunit": "~7.0",
-                "spiral/code-style": "^1.0"
+                "mockery/mockery": "^1.3",
+                "phpunit/phpunit": "^8.5|^9.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "Spiral\\Core\\": "src/"
+                    "Spiral\\Core\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1092,44 +1094,41 @@
             ],
             "authors": [
                 {
-                    "name": "Wolfy-J",
-                    "email": "wolfy.jd@gmail.com"
+                    "name": "Anton Titov (wolfy-j)",
+                    "email": "wolfy-j@spiralscout.com"
                 }
             ],
-            "description": "Spiral Core: IoC container, IoC scopes, factory, memory, configuration interfaces",
-            "support": {
-                "issues": "https://github.com/spiral/core/issues",
-                "source": "https://github.com/spiral/core/tree/v1.4.4"
-            },
-            "time": "2019-12-27T08:47:26+00:00"
+            "description": "IoC container, IoC scopes, factory, memory, configuration interfaces",
+            "homepage": "https://spiral.dev",
+            "time": "2020-12-23T19:07:39+00:00"
         },
         {
             "name": "spiral/database",
-            "version": "v2.7.20",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/database.git",
-                "reference": "5ae0a627f37428520b24391683df29f97c7ae7f9"
+                "reference": "a729662ae424cc18b9b57bdbaf6742caeec98a8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/database/zipball/5ae0a627f37428520b24391683df29f97c7ae7f9",
-                "reference": "5ae0a627f37428520b24391683df29f97c7ae7f9",
+                "url": "https://api.github.com/repos/spiral/database/zipball/a729662ae424cc18b9b57bdbaf6742caeec98a8e",
+                "reference": "a729662ae424cc18b9b57bdbaf6742caeec98a8e",
                 "shasum": ""
             },
             "require": {
                 "ext-pdo": "*",
-                "php": "^7.2",
-                "spiral/core": "^1.1",
-                "spiral/logger": "^1.0",
-                "spiral/pagination": "^2.2"
+                "php": ">=7.2",
+                "spiral/core": "^2.7",
+                "spiral/logger": "^2.7",
+                "spiral/pagination": "^2.7"
             },
             "require-dev": {
                 "mockery/mockery": "^1.1",
                 "phpunit/phpunit": "~8.0",
                 "spiral/code-style": "^1.0",
-                "spiral/dumper": "^1.0",
-                "spiral/tokenizer": "^2.1"
+                "spiral/dumper": "^2.7",
+                "spiral/tokenizer": "^2.7"
             },
             "type": "library",
             "autoload": {
@@ -1150,73 +1149,28 @@
             "description": "DBAL, schema introspection, migration and pagination",
             "support": {
                 "issues": "https://github.com/spiral/database/issues",
-                "source": "https://github.com/spiral/database/tree/v2.7.20"
+                "source": "https://github.com/spiral/database/tree/v2.8.0"
             },
-            "time": "2020-11-20T14:49:27+00:00"
+            "time": "2020-12-23T19:13:33+00:00"
         },
         {
             "name": "spiral/logger",
-            "version": "v1.2.2",
+            "version": "2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/logger.git",
-                "reference": "20fc6cf2b44ee85d92cfc1f30d4e92b9f3efb81a"
+                "reference": "3798cc7d26e3b92ee87e1db6ebd0503aaa950ea4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/logger/zipball/20fc6cf2b44ee85d92cfc1f30d4e92b9f3efb81a",
-                "reference": "20fc6cf2b44ee85d92cfc1f30d4e92b9f3efb81a",
+                "url": "https://api.github.com/repos/spiral/logger/zipball/3798cc7d26e3b92ee87e1db6ebd0503aaa950ea4",
+                "reference": "3798cc7d26e3b92ee87e1db6ebd0503aaa950ea4",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2",
+                "php": ">=7.2",
                 "psr/log": "^1.0",
-                "spiral/core": "^1.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.1",
-                "phpunit/phpunit": "~7.0",
-                "spiral/code-style": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spiral\\Logger\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anton Titov / Wolfy-J",
-                    "email": "wolfy.jd@gmail.com"
-                }
-            ],
-            "description": "LogFactory and global log listeners",
-            "support": {
-                "issues": "https://github.com/spiral/logger/issues",
-                "source": "https://github.com/spiral/logger/tree/v1.2.2"
-            },
-            "time": "2020-07-30T10:51:30+00:00"
-        },
-        {
-            "name": "spiral/pagination",
-            "version": "v2.6.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spiral/pagination.git",
-                "reference": "f97e8143f92828ecfc66b234684766acc25aedad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spiral/pagination/zipball/f97e8143f92828ecfc66b234684766acc25aedad",
-                "reference": "f97e8143f92828ecfc66b234684766acc25aedad",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2"
+                "spiral/core": "^2.7.2"
             },
             "require-dev": {
                 "mockery/mockery": "^1.3",
@@ -1225,7 +1179,57 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7.x-dev"
+                    "dev-master": "2.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spiral\\Logger\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Titov (wolfy-j)",
+                    "email": "wolfy-j@spiralscout.com"
+                }
+            ],
+            "description": "LogFactory and global log listeners",
+            "homepage": "https://spiral.dev",
+            "support": {
+                "issues": "https://github.com/spiral/framework/issues",
+                "source": "https://github.com/spiral/logger"
+            },
+            "time": "2020-12-24T10:51:45+00:00"
+        },
+        {
+            "name": "spiral/pagination",
+            "version": "v2.7.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spiral/pagination.git",
+                "reference": "db813575b12a35e59edd36a954660a11187fdab1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spiral/pagination/zipball/db813575b12a35e59edd36a954660a11187fdab1",
+                "reference": "db813575b12a35e59edd36a954660a11187fdab1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3",
+                "phpunit/phpunit": "^8.5|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8.x-dev"
                 }
             },
             "autoload": {
@@ -1239,17 +1243,13 @@
             ],
             "authors": [
                 {
-                    "name": "Anton Titov / Wolfy-J",
-                    "email": "wolfy.jd@gmail.com"
+                    "name": "Anton Titov (wolfy-j)",
+                    "email": "wolfy-j@spiralscout.com"
                 }
             ],
             "description": "Common pagination interfaces",
             "homepage": "https://spiral.dev",
-            "support": {
-                "issues": "https://github.com/spiral/framework/issues",
-                "source": "https://github.com/spiral/pagination"
-            },
-            "time": "2020-09-29T11:33:11+00:00"
+            "time": "2020-12-23T19:07:39+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1495,23 +1495,23 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v5.1.8",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "27980838fd261e04379fa91e94e81e662fe5a1b6"
+                "reference": "a04209ba0d1391c828e5b2373181dac63c52ee70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/27980838fd261e04379fa91e94e81e662fe5a1b6",
-                "reference": "27980838fd261e04379fa91e94e81e662fe5a1b6",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/a04209ba0d1391c828e5b2373181dac63c52ee70",
+                "reference": "a04209ba0d1391c828e5b2373181dac63c52ee70",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/polyfill-php80": "^1.15",
-                "symfony/translation-contracts": "^2"
+                "symfony/translation-contracts": "^2.3"
             },
             "conflict": {
                 "symfony/config": "<4.4",
@@ -1541,6 +1541,9 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "Resources/functions.php"
+                ],
                 "psr-4": {
                     "Symfony\\Component\\Translation\\": ""
                 },
@@ -1565,7 +1568,7 @@
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v5.1.8"
+                "source": "https://github.com/symfony/translation/tree/v5.2.1"
             },
             "funding": [
                 {
@@ -1581,7 +1584,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T12:01:57+00:00"
+            "time": "2020-12-08T17:03:37+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -1752,5 +1755,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }

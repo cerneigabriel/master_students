@@ -20,7 +20,7 @@
           <thead class="thead-light">
             <tr>
               <th>Id</th>
-              <th>Leader</th>
+              <th>Speciality</th>
               <th>Group</th>
               <th>Year</th>
               <th>Created At</th>
@@ -31,7 +31,7 @@
           <tfoot>
             <tr>
               <th>Id</th>
-              <th>Leader</th>
+              <th>Speciality</th>
               <th>Group</th>
               <th>Year</th>
               <th>Created At</th>
@@ -43,8 +43,8 @@
             <?php foreach ($groups as $group) : ?>
               <tr>
                 <td><?php echo $group->id ?></td>
-                <td><?php echo $group->leader()->first_name . " " . $group->leader()->last_name ?></td>
-                <td><?php echo $group->name ?></td>
+                <td><?php echo $group->speciality()->name ?></td>
+                <td><?php echo $group->speciality()->abbreviation . $group->name ?></td>
                 <td><?php echo $group->year ?></td>
                 <td><?php echo $group->created_at ?></td>
                 <td><?php echo $group->updated_at ?></td>

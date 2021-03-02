@@ -3,7 +3,7 @@
 use MasterStudents\Core\Migration;
 use Spiral\Database\Injection\Fragment;
 
-class m0008_create_specialities_table extends Migration
+class m0009_create_specialities_table extends Migration
 {
     public function up()
     {
@@ -20,7 +20,19 @@ class m0008_create_specialities_table extends Migration
             $schema->timestamp("created_at")->nullable(false)->defaultValue(new Fragment("CURRENT_TIMESTAMP"));
             $schema->timestamp("updated_at")->nullable(false)->defaultValue(new Fragment("CURRENT_TIMESTAMP"));
 
-            return $schema;
+            return [
+                "schema" => $schema,
+                "foreign_keys" => [
+                    [
+                        "table" => "specialities",
+                        "foreign_key" => "language_id",
+                        "references" => "id",
+                        "on" => "languages",
+                        "delete" => "CASCADE",
+                        "update" => "CASCADE"
+                    ]
+                ]
+            ];
         }
     }
 
@@ -29,8 +41,3 @@ class m0008_create_specialities_table extends Migration
         $this->db->table("specialities")->drop();
     }
 }
-
-// After migrating tables, you'll need some references between them, add these lines of code will help you pass through this challenge.
-// SET FOREIGN_KEY_CHECKS=0;
-// ALTER TABLE `groups` ADD  CONSTRAINT `user_group_fk` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-// SET FOREIGN_KEY_CHECKS=1

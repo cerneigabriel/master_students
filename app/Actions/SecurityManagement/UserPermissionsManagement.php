@@ -177,9 +177,7 @@ trait UserPermissionsManagement
         $permissions = vector();
 
         map($this->roles())->each(function ($role) use ($permissions) {
-            // var_dump($role->permissions());
             $permissions->addAll($role->permissions());
-            // map($role->permissions())->each(fn ($p) => $permissions->add($p));
         });
 
         return $permissions->toArray();

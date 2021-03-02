@@ -28,3 +28,7 @@ router()->post("{$admin_prefix}/groups/{group_id}/users/attach", getAdminRouteDe
 
 
 router()->post("{$admin_prefix}/groups/{group_id}/users/update", getAdminRouteDetails("GroupsController::updateUsers", "groups.update_users"));
+
+
+// Group invitation
+router()->post("{$admin_prefix}/groups/{group_id}/users/invite", getAdminRouteDetails("GroupsController::invite", "groups.invite"));

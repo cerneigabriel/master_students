@@ -138,9 +138,6 @@ class LanguagesController extends Controller
     {
         $this->runHandler(["edit_admin_users"]);
 
-        var_dump($request->all()->toArray());
-        die();
-
         $user = User::updateAction($request->all()->toArray(), $params["id"], "adminUpdateRules");
 
         if ($user->server_error) return response()->redirect(url("error", ["code" => 500]));

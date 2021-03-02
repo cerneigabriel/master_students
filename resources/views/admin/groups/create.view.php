@@ -24,20 +24,24 @@ use MasterStudents\Models\Group;
         <h6 class="m-0 font-weight-bold text-primary">Basic information</h6>
       </div>
       <div class="card-body">
+        <h4 class="mb-3">Group <span id="abberviation"><?php echo map($specialities)->first()->abbreviation ?></span><span id="group_name"><?php echo isset($model) ? $model->get("name") : ""; ?></span></h4>
+
         <div class="form-group">
-          <label class="form-label" for="user_input">Choose Leader</label>
-          <select class="form-control <?php echo isset($errors) && !is_null($errors->first("user_id")) ? "is-invalid" : ""; ?>" name="user_id" id="user_input" aria-describedby="user_id_error">
-            <?php foreach ($users as $user) : ?>
-              <option value="<?php echo $user->id ?>"><?php echo "$user->first_name $user->last_name" ?></option>
+          <label class="form-label" for="speciality_id">Speciality</label>
+          <select class="form-control <?php echo isset($errors) && !is_null($errors->first("speciality_id")) ? "is-invalid" : ""; ?>" name="speciality_id" id="speciality_id" aria-describedby="speciality_id_error">
+            <?php foreach ($specialities as $speciality) : ?>
+              <option value="<?php echo $speciality->id ?>"><?php echo "$speciality->name" ?></option>
             <?php endforeach; ?>
           </select>
-          <div id="user_id_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("user_id") : ""; ?></div>
+          <div id="speciality_id_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("speciality_id") : ""; ?></div>
         </div>
 
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" name="name" class="form-control <?php echo isset($errors) && !is_null($errors->first("name")) ? "is-invalid" : ""; ?>" id="name" value="<?php echo isset($model) ? $model->get("name") : ""; ?>" aria-describedby="name_error">
+
           <div id="name_error" class="invalid-feedback"><?php echo isset($errors) ? $errors->first("name") : ""; ?></div>
+
         </div>
 
         <div class="form-group" id="year_input">
@@ -60,17 +64,31 @@ use MasterStudents\Models\Group;
 </form>
 
 <script>
+  const specialities = <?php echo json_encode(map($specialities)->map(fn ($i) => $i->toArray())->toArray()) ?>;
+
   $(document).ready(function() {
-    $('#user_input').select2();
-    $('#year_input .input-group.date').datepicker({
+    $("#speciality_id").select2();
+    $("#year_input .input-group.date").datepicker({
       endDate: (new Date()).getFullYear().toString(),
       minViewMode: "years",
       maxViewMode: "years",
       startView: "years",
-      format: 'yyyy',
+      format: "yyyy",
       autoclose: true,
       todayHighlight: true,
-      todayBtn: 'linked',
+      todayBtn: "linked",
+    });
+
+    $(document).on("change", "#speciality_id", function() {
+      var speciality = specialities.find(item => item.id === parseInt($(this).val()));
+      
+      if (speciality) {
+        $("#abberviation").text(speciality.abbreviation);
+      }
+    });
+
+    $(document).on("keyup", "#name", function() {
+      $("#group_name").text($(this).val());
     });
   });
 </script>

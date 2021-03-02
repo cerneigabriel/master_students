@@ -84,7 +84,8 @@ class Router
                 $route_path_without_params = $r->getExplodedRoutePathWithoutParams()->toArray();
                 $current_path = map(explode("/", $path))->filter(fn ($v) => $v != "")->toArray();
                 $is_valid = false;
-
+                
+                
                 if (count($route_path) === count($current_path)) {
                     if (count($route_path) > 0) {
                         foreach ($route_path_without_params as $value) {
@@ -96,6 +97,7 @@ class Router
 
                 return $is_valid;
             });
+
 
         if (!is_null($method))
             $routes = $routes->filter(fn ($route) => ($route->method === $method));

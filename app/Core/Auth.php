@@ -134,6 +134,24 @@ class Auth
 
         return false;
     }
+    /**
+     * Try to login user by user
+     *
+     * @param string $email_username
+     * @param string $password
+     * @return void
+     */
+    protected function loginAttemptByUser(User $user)
+    {
+        if (!is_null($user)) {
+            static::$user_session = UserSession::login($user, static::$CSRF_TOKEN, false);
+            static::$user = $user;
+
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Get authenticated user

@@ -4,8 +4,6 @@ namespace MasterStudents\Controllers\Student;
 
 use MasterStudents\Core\Auth;
 use MasterStudents\Core\View;
-
-// Models
 use MasterStudents\Core\Request;
 use MasterStudents\Core\Controller;
 
